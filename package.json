@@ -1,0 +1,22 @@
+{
+  "name": "newsite",
+  "version": "1.0.0",
+  "description": "portfolio-zm412",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zm412/zm412-portfolio-2.git"
+  },
+  "author": "zm412",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zm412/zm412-portfolio-2/issues"
+  },
+  "homepage": "https://github.com/zm412/zm412-portfolio-2#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
