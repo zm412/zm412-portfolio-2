@@ -1,0 +1,42 @@
+#accord {
+	margin: 0 auto;
+	width: 400px;
+}
+
+.task {
+	margin-bottom: 10px;
+}
+
+.linkTo a{ 
+  display: block; 
+  padding: 10px; 
+  color: black; 
+  text-decoration: none; 
+  text-align: center; 
+  background: #f8f8f8; 
+  border: 1px solid gray; 
+} 
+
+.linkTo :hover{ 
+  color:red; 
+  background: #f2f2f2; 
+} 
+
+.task.active .linkTo a{ 
+  background: lightblue; 
+} 
+
+.task:not(.active) .text {
+	display: none;
+}
+
+.task.active .text{
+  display: inline;
+}
+
+.task .text {
+	border-top: none;
+	padding: 10px;
+	height: 500px;
+}
+

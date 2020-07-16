@@ -1,0 +1,60 @@
+
+
+  <div class='row'>
+      <nav id="navbar-example2" class="navbar navbar-light bg-light">
+
+      <div class='col'>
+        <div class='logo'>
+          <div class='slogan'>
+            <p>zm412</br>
+              <span>Portfolio - Web Developer</span></p>
+          </div>
+      </div>
+    </div>
+
+  <div class='col-5'>
+    <div class='form-p'>
+      <form action='' method="get">
+      <input type='search' value='Поиск'>
+      <input type='submit' value='Поиск'>
+      </form>
+    </div>
+  </div>
+
+    <div class='col'>
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+          <a href='index'>Home</a>
+      </li>
+    </div>
+    
+    <div class='col'>
+      <li class="nav-item">
+        <a href='gallery'>Gallery</a>
+      </li>
+    </div>
+    <div class='col'>
+      <li class="nav-item">
+        <a href='about'>About</a>
+      </li>
+    </div>
+    <div class='col'>
+      <li class="nav-item">
+        <a href='contacts'>Contacts</a>
+      </li>
+    </div>
+    <div class='col'>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#one">one</a>
+          <a class="dropdown-item" href="#two">two</a>
+          <div role="separator" class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#three">three</a>
+        </div>
+      </li>
+      </col>
+    </ul>
+  </nav>
+ </div>
+
