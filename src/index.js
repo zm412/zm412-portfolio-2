@@ -1,14 +1,29 @@
 
 let express = require('express');
+let bodyParser = require('body-parser');
 let app = express();
+
+let urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.set('view engine', 'ejs');
 
 app.use('/public', express.static('public'));
 
+app.post('/about', urlencodedParser, function (req, res) {
+  if(!req.body) return res.sendStatus(400);
+  
+  console.log(req.body);
+  res.render('about-success', {data: req.body});
+});
+
 app.get(/\/*/, function (req, res){
+ let pages = ['index', '','about', 'contacts', 'gallery'] ;
   let name = req.url.slice(1);
-    res.render(name);
+    if(pages.includes(name)){
+      res.render(name);
+    }else{
+    res.render('404');
+  }
 });
 
 
