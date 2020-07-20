@@ -17,12 +17,17 @@ app.post('/about', urlencodedParser, function (req, res) {
 });
 
 app.get(/\/*/, function (req, res){
- let pages = ['index', '','about', 'contacts', 'gallery'] ;
+ let pages = ['index', 'about', 'tasks', 'gallery'] ;
   let name = req.url.slice(1);
+  name == '' ? name = 'index' : name = name;
     if(pages.includes(name)){
-      res.render(name);
+      res.render(name, {
+        title: name
+      });
     }else{
-    res.render('404');
+      res.render('404',{
+        title: 'error'
+      });
   }
 });
 

@@ -1,6 +1,6 @@
-	'use strict'
+(function getGallery(){
+    document.body.onload = startAction;
 
-document.body.onload = startAction;
 
 let arr = ['Русская баня','Римская баня', 'Финская баня',  'Японская баня', 'Инфракрасная', 'Скандинавская', 'Турецкая сауна'];
 let arrTb = [
@@ -12,16 +12,19 @@ function startAction(){
 	let prev = document.getElementById('prev');
 	let next = document.getElementById('next');
 	let position = 0;
+
 	menu.onclick = changingTab;
 	putMeaning(arr, arrTb, position);
-	prev.addEventListener('click', function(){
-	position > 0 ? position-- : position = arr.length - 1;
-		putMeaning(arr,arrTb, position);
-	});
-	next.addEventListener('click', function(){
+
+    prev.addEventListener('click', function(){
+      position > 0 ? position-- : position = arr.length - 1;
+      putMeaning(arr,arrTb, position);
+    });
+
+    next.addEventListener('click', function(){
 		position >= arr.length - 1  ? position = 0 : position++;
-	putMeaning(arr,arrTb, position);
-	});
+    putMeaning(arr,arrTb, position);
+    });
 
 
               function changingTab(event){
@@ -39,19 +42,6 @@ function startAction(){
                 }
               }
 
-              function putClassActive(elems,evTarget,){
-                for(let i = 0;  i < elems.length; i++){
-                  if(elems[i].innerHTML == event.target.innerHTML){
-                    elems[i].classList.add('active');
-                    let pos = arr.indexOf(elems[i].innerHTML, 0);
-                    meaningForImg(arrTb, pos, pic);
-                  }else{
-                    elems[i].classList.remove('active');	
-                  }
-                }
-                
-              }
-
               function putMeaning(arr, arr1, startPosition){
                 let views = document.querySelectorAll('.view');
                 let pic = document.getElementById('pic');
@@ -61,10 +51,10 @@ function startAction(){
                   if(j >= 4) return;
                      views[j].innerHTML = arr[i];
                         if(i == startPosition){
-                      views[0].classList.add('active');
-                      meaningForImg(arr1, i, pic);
+                          views[0].classList.add('active');
+                          meaningForImg(arr1, i, pic);
                         }else{
-                      views[j].classList.remove('active');
+                          views[j].classList.remove('active');
                         }
                 }
               }
@@ -79,6 +69,7 @@ function startAction(){
                   localPositionActive > 0 ? localPositionActive--: localPositionActive = arr[pos].length - 1;
                   getResult(pos, localPositionActive, dotes, elem, arr);
                 });
+                
                 nextTb.addEventListener('click', function(){
                   localPositionActive >= arr[pos].length - 1  ? localPositionActive = 0 : localPositionActive++;
                   getResult(pos, localPositionActive, dotes, elem, arr);
@@ -114,3 +105,6 @@ function startAction(){
 
 
 	}	
+  }
+());
+

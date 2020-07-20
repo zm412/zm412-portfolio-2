@@ -1,22 +1,15 @@
 'use strict'
 
-startActionAccord();
+/*
 
-function startActionAccord(){
-	let accord = document.getElementById('accord');
-	accord.onclick = changingTab;
+the first arg - is selector of main elem (usually - 'a'), 
+second - selector of block - own of event (own.onclick = func;),
+  we are using querySelector(second);
+third - selector of elem, where we gonna add (or remove), class 'active'
 
 
-        function changingTab(event){
-          if(event.target.tagName != 'A') return;
-          let aes = document.querySelectorAll('.linkTo a');
-          for(let i = 0;  i < aes.length; i++){
-            if(aes[i].innerHTML == event.target.innerHTML){
-              aes[i].closest('.task').classList.add('active');	
-            }else{
-              aes[i].closest('.task').classList.remove('active');	
-            }
-          }
-        }
+ */
 
-}
+let accord = new ActiveLink('.linkTo a', '#accord','.task');
+accord.proc();
+
