@@ -1,8 +1,12 @@
 'use strict'
 
-let zapretSosedyam = document.getElementById('zapretSosedyam');
+
+let zapretSos = function(parentId, idTable, classTh, classTr, classTd){
+
+
+let zapretSosedyam = document.getElementById(parentId);
 zapretSosedyam.insertAdjacentHTML('afterbegin', `
-              <table id = 'tblZapretSosedyam' onclick = "funcZapretSosedyam(event)" class = 'middle table table-bordered'>
+              <table id = 'tblZapretSosedyam'  class = 'middle table table-bordered'>
               <tr class = 'trZapret'><th class = 'thZapret'>Name</th><th class = 'thZapret'>date</th><th class = 'thZapret'>Plants</th><th class = 'thZapret'>num</th><th class = 'thZapret'>num</th></tr>
               <tr class = 'trZapret'><td class = 'tdZapret'>Mila</td><td class = 'tdZapret'>10/18/2002</td><td class = 'tdZapret'>mango</td><td class = 'tdZapret'>23</td><td class = 'tdZapret'>23</td></tr>
               <tr class = 'trZapret'><td class = 'tdZapret'>Ruslan</td><td class = 'tdZapret'>09/25/1999</td><td class = 'tdZapret'>orange</td><td class = 'tdZapret'>15</td><td class = 'tdZapret'>23</td></tr>
@@ -14,52 +18,54 @@ zapretSosedyam.insertAdjacentHTML('afterbegin', `
 `)
 
 
+        let tbl = document.getElementById(idTable);
+        tbl.onclick = funcZapretSosedyam;
+        putColsNumbers();
 
-putColsNumbers();
-
-
-
-function funcZapretSosedyam(event){	
-	let tbl = document.getElementById('tblZapretSosedyam');
-	let tds = tbl.querySelectorAll('.tdZapret');
-	let ths = tbl.querySelectorAll('.thZapret');
-	let trs = tbl.querySelectorAll('.trZapret');
-	if(event.target.tagName != 'TD') return;
-		event.target.style.color = 'red';
-	let numberNum = event.target.dataset.num;
-	let arrTD = extractNums(numberNum);
-		for(let i = 0; i < tds.length; i++){
-			for(let elem of arrTD){
-				if(tds[i].dataset.num == elem){
-						tds[i].style.backgroundColor = 'blue';
-						tds[i].classList = 'none';
-				}
-			}
-		}
-
-              function extractNums(num){
-                  let arr = [];
-                  let n = num;
-                  let a = num;
-                  let b = Number(num);
-                  arr.push(n-=11, ++n, ++n, --a, a+=2, b+=9, ++b, ++b); 
-                return arr;	
+        function funcZapretSosedyam(event){	
+          let tds = tbl.querySelectorAll(classTd);
+          let ths = tbl.querySelectorAll(classTh);
+          let trs = tbl.querySelectorAll(classTr);
+          if(event.target.tagName != 'TD') return;
+            event.target.style.color = 'red';
+          let numberNum = event.target.dataset.num;
+          let arrTD = extractNums(numberNum);
+            for(let i = 0; i < tds.length; i++){
+              for(let elem of arrTD){
+                if(tds[i].dataset.num == elem){
+                    tds[i].style.backgroundColor = 'blue';
+                    tds[i].classList = 'none';
+                }
               }
+            }
 
-}	
-	
-	
-function putColsNumbers(){
-	let tbl = document.getElementById('tblZapretSosedyam');
-	let trs = tbl.querySelectorAll('.trZapret');
+                      function extractNums(num){
+                          let arr = [];
+                          let n = num;
+                          let a = num;
+                          let b = Number(num);
+                          arr.push(n-=11, ++n, ++n, --a, a+=2, b+=9, ++b, ++b); 
+                        return arr;	
+                      }
 
-	for(let i = 1; i < trs.length; i++){
-		let tds2 = trs[i].querySelectorAll('td');
-		for(let j = 0; j < tds2.length; j++){
-			tds2[j].dataset.col = j + 1;
-			tds2[j].dataset.num = String(i) + (j+1);
-		}
-	}
+        }	
+          
+          
+        function putColsNumbers(){
+          let trs = tbl.querySelectorAll(classTr);
+
+          for(let i = 1; i < trs.length; i++){
+            let tds2 = trs[i].querySelectorAll('td');
+            for(let j = 0; j < tds2.length; j++){
+              tds2[j].dataset.col = j + 1;
+              tds2[j].dataset.num = String(i) + (j+1);
+            }
+          }
+        }
+
+
 }
+
+zapretSos('zapretSosedyam','tblZapretSosedyam', '.thZapret', '.trZapret', '.tdZapret')
 
 
