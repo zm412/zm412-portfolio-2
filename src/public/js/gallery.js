@@ -1,4 +1,38 @@
-(function getGallery(){
+let getGallery = function (par){
+  
+  let parentOfModule = document.querySelector(par);
+  parentOfModule.insertAdjacentHTML('afterbegin', `
+
+        <div class="tabs">
+          <div id = 'unic' class ="tabD">
+            <div class='num'></div>
+            <img src = '' alt = '' id = 'pic' width = '100%' height = '100%'>
+          </div>
+            <div class = 'sideTb'>
+            <button id = 'prevTb'>&#10094</button>
+            <button id = 'nextTb'>&#10095</button>
+          </div>
+        </div>
+            <div id = 'dts' style="text-align:center">
+              <span class="dot" data-num = "1"></span>
+              <span class="dot" data-num = "2"></span>
+              <span class="dot" data-num = "3"></span>
+            </div>
+        <div class="menu">
+        <button id = 'prev'>&#10094</button>
+          <a href="#" class='view'></a>
+          <a href="#" class = 'view'></a>
+          <a href="#" class = 'view'></a>
+          <a href="#" class = 'view'></a>
+        <button id = 'next'>&#10095</button>
+        </div>
+
+    `);
+  
+
+
+
+
     document.body.onload = startAction;
 
 
@@ -105,6 +139,7 @@ function startAction(){
 
 
 	}	
-  }
-());
+  };
+
+getGallery('#group')
 
