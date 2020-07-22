@@ -37,7 +37,6 @@ let getPriceOfSauna = function(par){
     </fieldset>
             </form>
           </div>
-          <p id = 'cost'></p>
   `)
   
 
