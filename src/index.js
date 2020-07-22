@@ -1,4 +1,5 @@
 
+let fs = require('fs');
 let express = require('express');
 let bodyParser = require('body-parser');
 let app = express();
@@ -12,8 +13,11 @@ app.use('/public', express.static('public'));
 app.post('/about', urlencodedParser, function (req, res) {
   if(!req.body) return res.sendStatus(400);
   
+  
   console.log(req.body);
-  res.render('about-success', {data: req.body});
+  res.render('about-success', {
+    title: 'about-success',
+    data: req.body});
 });
 
 app.get(/\/*/, function (req, res){
