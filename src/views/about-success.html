@@ -2,13 +2,13 @@
 <!doctype html>
   <html lang="ru">
   <head>
-    <%- include("blocks/metaList.ejs") %>
+    <%- include("blocks/metaList.html") %>
   </head>
 
 
   <body class='block'>
 
-    <%- include("blocks/header.ejs") %>
+    <%- include("blocks/header.html") %>
         
  <div class="card-body">
     <h5 class="card-title">Web developer - portfolio</h5>
@@ -36,7 +36,7 @@
             <div class="col-8"  justify-content-start >
               <div class="moreInfo">
                               <% if(data.moreInfo){ %>
-                                <%- include("../articles/moreInfo.ejs") %>
+                                <%- include("../articles/moreInfo.html") %>
                              <% } %>
               </div>
             </div>
@@ -47,8 +47,8 @@
         </div>
 </div>
 
-    <%- include("blocks/footer.ejs") %>
-    <%- include("blocks/scriptList.ejs") %>
+    <%- include("blocks/footer.html") %>
+    <%- include("blocks/scriptList.html") %>
   </body>
 </html>
 
