@@ -2,7 +2,7 @@
 let config = require('./config');
 let mongoose = require('mongoose');
 
-var db = () => {
+module.exports = () => {
   return new Promise((resolve, reject) => {
     mongoose.Promise = global.Promise;
     mongoose.set('debug', true);
@@ -21,30 +21,3 @@ var db = () => {
 }
 
 
-let Schema = mongoose.Schema;
-const aboutSchema = new Schema({
-  email: {
-    type: String,
-    //match: /^.+@.+\..+$/igm,
-    require: true
-  },
-  check:{
-    type: String,
-    default: 'off'
-  } ,
-  moreInfo: {
-    type: String,
-    default: 'off'
-  },
-  date: {
-    type: Date,
-    default: Date.now 
-  }
-}, { versionKey: false });
-
-const Adress = mongoose.model('Adress', aboutSchema);
-
-module.exports = {
-  adressModel : Adress,
-  db : db
-}

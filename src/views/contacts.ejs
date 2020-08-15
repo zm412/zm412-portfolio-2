@@ -2,13 +2,13 @@
 <!doctype html>
   <html lang="ru">
   <head>
-    <%- include("blocks/metaList.html") %>
+    <%- include("blocks/metaList.ejs") %>
   </head>
 
 
-  <body class='block'>
+  <body class='block' onload = "clearField()">
 
-    <%- include("blocks/header.html") %>
+    <%- include("blocks/header.ejs") %>
         
  <div class="card-body">
     <h5 class="card-title">Web developer - portfolio</h5>
@@ -23,17 +23,17 @@
               <form method='post' action='contacts' >
           <div class="form-group">
             <label for="exampleFormControlInput1">Name/Username</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name/username" name='nameForComment'>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name/username" id='inpNameForComm' name='nameForComment'>
           </div>
           
           <div class="form-group">
             <label for="exampleFormControlTextarea1">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name='texarForComment'></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" id='texarForComm' name='texarForComment'></textarea>
           </div>
 
          
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">Post comment</button>
+            <button type="submit" class="btn btn-primary"  id='buttForComment'>Post comment</button>
           </div>
         </form>
 
@@ -41,11 +41,13 @@
   </div>
 
     <div class='col-lg-3 col-md-6 col-sm-12' >
+    <p><%= isComment %></p><hr>
   <ul>
     <% posts.forEach(function(post){ %>
     <li>
-      <%= post.name  %> <br>
+    <h4>  <%= post.name  %> <br></h4>
       <%= post.body  %> <br>
+      <hr>
     </li>
     <% }) %>
   </ul>
@@ -70,11 +72,12 @@
 
 
 
+
           </main>
         </div>
 </div>
 
-    <%- include("blocks/footer.html") %>
-    <%- include("blocks/scriptList.html") %>
+    <%- include("blocks/footer.ejs") %>
+    <%- include("blocks/scriptList.ejs") %>
   </body>
 </html>
