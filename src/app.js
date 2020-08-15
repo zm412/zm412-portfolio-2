@@ -9,15 +9,17 @@ let database = require('./database');
 let db = database.db;
 let Adress = database.adressModel;
 let app = express();
-let urlencodedParser = bodyParser.urlencoded({ extended: false });
+//let urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+const CommPost = require('./models/comment')
 app.engine('html', require('ejs').renderFile);
 
 app.set('view engine', 'html');
 
 app.use('/public', express.static('public'));
+app.use(bodyParser.urlencoded({extended: true}));
 
-app.post('/about', urlencodedParser, function (req, res) {
+app.post('/about', (req, res) => {
   if(!req.body) return res.sendStatus(400);
   let adressIs;
   
@@ -38,6 +40,46 @@ app.post('/about', urlencodedParser, function (req, res) {
           });
   })
 });
+
+app.get('/contacts', function (req, res){
+
+  CommPost.find({}).then(posts => {
+    let name = req.url.slice(1);
+      res.render(name, { 
+        title: name,
+        posts: posts
+      });
+
+  })
+});
+
+
+app.post('/contacts', (req, res) => {
+  if(!req.body) return res.sendStatus(400);
+  console.log(req.body);
+          
+          async function getOrder(){
+           try{ await CommPost.create({
+                    name: req.body.nameForComment,
+                    body: req.body.texarForComment
+                  });
+
+          CommPost.find({}).then(posts => {
+              res.render('contacts', { 
+                title: 'contacts',
+                posts: posts
+              });
+          })
+
+           } catch(e) {
+             console.log(e)
+           }
+          }
+
+  getOrder();
+
+  });
+
 app.get(/\/|\/index/, function (req, res){
   let name = req.url.slice(1);
   name == '' ? name = 'index' : name = name;
@@ -66,8 +108,6 @@ app.get('/gallery', function (req, res){
 app.get('/test', function (req, res){
   req.sendFile(__dirname + 'test.html')
 });
-
-
 
 
 app.get('/test/:id', function(req, res){

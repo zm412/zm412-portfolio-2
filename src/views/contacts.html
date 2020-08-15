@@ -12,54 +12,52 @@
         
  <div class="card-body">
     <h5 class="card-title">Web developer - portfolio</h5>
-      <a href="/" class="btn btn-primary">Return to home page</a>
         <div class='container-fluid'>
           <main>
 
 
+  <div class='row'>
+ 
+    <div class='col-lg-4  col-md-6 col-sm-12' id = 'blockComments'>
 
+              <form method='post' action='contacts' >
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Name/Username</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name/username" name='nameForComment'>
+          </div>
+          
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Example textarea</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name='texarForComment'></textarea>
+          </div>
 
+         
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Post comment</button>
+          </div>
+        </form>
 
-
-<div class='row'>
-  <div class='col'>
-
-  <div id="accord">
-    
-
-    <div class="task">
-      <div class="linkTo"> <a href="#" >Table Spiral</a> </div>
-        <div class="text"> <div id = 'blockSpiral'></div> </div>
-    </div> 
-
-    <div class="task">
-      <div class="linkTo"> <a href="#" >Table Transpose</a> </div>
-        <div class="text"> <div id = 'transpose'></div> </div>
-    </div>
-
-    <div class="task">
-      <div class="linkTo"> <a href="#" >Table - sort by click</a> </div>
-        <div class="text"><div id = 'sortByClick'></div></div>
-    </div>
-
-    <div class="task">
-      <div class="linkTo"> <a href="#" >ZapretSosedyam</a> </div>
-        <div class="text"><div id = 'zapretSosedyam'></div></div>
-    </div>
-
-    <div class="task">
-      <div class="linkTo"> <a href="#" >Game X-0</a> </div>
-        <div class="text"><div id = 'gameX0'></div></div>
-    </div>
-
-    <div class="task">
-      <div class="linkTo"> <a href="#" >Simple Calculator</a> </div>
-        <div class="text"><div id = 'simpleCalc'></div></div>
-    </div>
 
   </div>
+
+    <div class='col-lg-3 col-md-6 col-sm-12' >
+  <ul>
+    <% posts.forEach(function(post){ %>
+    <li>
+      <%= post.name  %> <br>
+      <%= post.body  %> <br>
+    </li>
+    <% }) %>
+  </ul>
+
+    </div>
+
+    <div class='col-lg-5 col-md-12 col-sm-12'> </div>
+
+   
   </div>
-</div>
+ 
+
 
     <script src = "/public/js/accord.js"></script>
     <script src = "/public/js/tableSpiral.js"></script>
