@@ -1,21 +1,32 @@
 
 require('dotenv').config();
-let fs = require('fs');
-let express = require('express');
-let bodyParser = require('body-parser');
-let config = require('./config');
-let database = require('./database');
+const fs = require('fs');
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const config = require('./config');
+const database = require('./database');
 const CommPost = require('./models/comment');
 const Address = require('./models/addresses');
-
+const expressHbs = require("express-handlebars");
+const hbs = require("hbs");
 
 let app = express();
+app.engine("hbs", expressHbs(
+    {
+        layoutsDir: "views/layouts", 
+        defaultLayout: "layout",
+        extname: "hbs"
+    }
+))
+app.set("view engine", "hbs");
+hbs.registerPartials(__dirname + "/views/partials");
+
+app.use(express.static(path.join(__dirname, 'public')))
 
 
-
-app.set('view engine', 'ejs');
-app.use('/public', express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
+console.log(path.join(__dirname, 'public'))
 
 app.post('/about', (req, res) => {
   if(!req.body) return res.sendStatus(400);
@@ -100,13 +111,15 @@ app.post('/contacts', (req, res) => {
 app.get(/\/|\/index/, function (req, res){
   let name = req.url.slice(1);
   name == '' ? name = 'index' : name = name;
-      res.render(name, { title:'HOME' });
+  console.log(__dirname)
+      res.render(name, { title:'HOME',});
 });
 
 
 app.get('/about', function (req, res){
+
   let name = req.url.slice(1);
-      res.render(name, { title: name });
+      res.render(name, { title: name} );
 });
 
 

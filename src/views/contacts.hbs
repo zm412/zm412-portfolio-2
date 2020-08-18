@@ -1,21 +1,3 @@
-
-<!doctype html>
-  <html lang="ru">
-  <head>
-    <%- include("blocks/metaList.ejs") %>
-  </head>
-
-
-  <body class='block' onload = "clearField()">
-
-    <%- include("blocks/header.ejs") %>
-        
- <div class="card-body">
-    <h5 class="card-title">Web developer - portfolio</h5>
-        <div class='container-fluid'>
-          <main>
-
-
   <div class='row'>
  
     <div class='col-lg-4  col-md-6 col-sm-12' id = 'blockComments'>
@@ -41,15 +23,21 @@
   </div>
 
     <div class='col-lg-3 col-md-6 col-sm-12' >
-    <p><%= isComment %></p><hr>
+    <p> {{isComment}}</p><hr>
   <ul>
-    <% posts.forEach(function(post){ %>
     <li>
-    <h4>  <%= post.name  %> <br></h4>
-      <%= post.body  %> <br>
+
+
+      {{#each posts}}
+
+            <h4>{{this.name}}</h4><br>
+
+            <p> {{this.body}} </p>
+
+      {{/each}}
+
       <hr>
     </li>
-    <% }) %>
   </ul>
 
     </div>
@@ -61,23 +49,4 @@
  
 
 
-    <script src = "/public/js/accord.js"></script>
-    <script src = "/public/js/tableSpiral.js"></script>
-    <script src = "/public/js/tableTranspose.js"></script>
-    <script src = "/public/js/sortByClick.js"></script>
-    <script src = "/public/js/zapretSosedyam.js"></script>
-    <script src = "/public/js/gameX0.js"></script> 
-    <script src = "/public/js/simpleCalc.js"></script>
 
-
-
-
-
-          </main>
-        </div>
-</div>
-
-    <%- include("blocks/footer.ejs") %>
-    <%- include("blocks/scriptList.ejs") %>
-  </body>
-</html>
