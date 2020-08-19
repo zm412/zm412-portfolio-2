@@ -18,7 +18,7 @@ let getGallery = function (par){
               <span class="dot" data-num = "2"></span>
               <span class="dot" data-num = "3"></span>
             </div>
-        <div class="menu">
+        <div class="menuGallery">
         <button id = 'prev'>&#10094</button>
           <a href="#" class='view'></a>
           <a href="#" class = 'view'></a>
@@ -42,12 +42,12 @@ let arrTb = [
 	]; 
 
 function startAction(){
-	let menu = document.querySelector('.menu');
+	let menuGallery = document.querySelector('.menuGallery');
 	let prev = document.getElementById('prev');
 	let next = document.getElementById('next');
 	let position = 0;
 
-	menu.onclick = changingTab;
+	menuGallery.onclick = changingTab;
 	putMeaning(arr, arrTb, position);
 
     prev.addEventListener('click', function(){

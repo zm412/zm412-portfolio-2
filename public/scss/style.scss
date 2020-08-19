@@ -7,10 +7,10 @@ $freeSpace: 15px;
 $headerHeight: 49px;
 $footerHeight: 49px;
 
-@import 'reset';
-@import 'grid';
-@import 'typography';
-@import 'forms';
+//@import 'reset';
+//@import 'grid';
+//@import 'typography';
+//@import 'forms';
 
 html {
   display: flex;
@@ -30,5 +30,5 @@ body {
 @import 'header';
 @import 'main';
 @import 'footer';
-@import 'components/post';
-@import 'components/auth';
+//@import 'components/post';
+//@import 'components/auth';
