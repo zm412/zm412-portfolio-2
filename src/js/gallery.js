@@ -1,10 +1,11 @@
 
 module.exports = () => {
-  function getGallery(par){
 
-  let parentOfModule = document.querySelector(par);
-    if(parentOfModule == null) return new Error;
-  parentOfModule.insertAdjacentHTML('afterbegin', `
+  let parentOfModule = document.querySelector('#group');
+  
+  function getGallery(){
+
+    parentOfModule.insertAdjacentHTML('afterbegin', `
         <div class="tabs">
           <div id = 'unic' class ="tabD">
             <div class='num'></div>
@@ -31,18 +32,11 @@ module.exports = () => {
     `);
 
 
+    startAction();
+    }
 
 
 
-
-
-let arr = ['Русская баня','Римская баня', 'Финская баня',  'Японская баня', 'Инфракрасная', 'Скандинавская', 'Турецкая сауна'];
- 
-      let arrTb = [
-        ['./images/rusSauna1.jpg','./images/rusSauna2.jpg', './images/rusSauna3.jpg'],['./images/rimSauna1.jpg','./images/rimSauna2.jpg', './images/rimSauna3.jpg'], ['./images/finnSauna1.jpg','./images/finnSauna2.jpg', './images/finnSauna3.jpg'], ['./images/japanSauna1.jpg','./images/japanSauna2.jpg', './images/japanSauna3.jpg'],['./images/infraSauna1.jpg','./images/infraSauna2.jpg', './images/infraSauna3.jpg'], ['./images/scandinavianSauna1.jpg','./images/scandinavianSauna2.jpg', './images/scandinavianSauna3.jpg'],['./images/turkishSauna1.jpg','./images/turkishSauna2.jpg', './images/turkishSauna3.jpg']
-              ]; 
-
-    
 
 function startAction(){
 	let menuGallery = document.querySelector('.menuGallery');
@@ -141,8 +135,15 @@ function startAction(){
 
 }
 
-    startAction();
-	}
-getGallery('#group')
-  };
+let arr = ['Русская баня','Римская баня', 'Финская баня',  'Японская баня', 'Инфракрасная', 'Скандинавская', 'Турецкая сауна'];
+ 
+let arrTb = [
+        ['./images/rusSauna1.jpg','./images/rusSauna2.jpg', './images/rusSauna3.jpg'],['./images/rimSauna1.jpg','./images/rimSauna2.jpg', './images/rimSauna3.jpg'], ['./images/finnSauna1.jpg','./images/finnSauna2.jpg', './images/finnSauna3.jpg'], ['./images/japanSauna1.jpg','./images/japanSauna2.jpg', './images/japanSauna3.jpg'],['./images/infraSauna1.jpg','./images/infraSauna2.jpg', './images/infraSauna3.jpg'], ['./images/scandinavianSauna1.jpg','./images/scandinavianSauna2.jpg', './images/scandinavianSauna3.jpg'],['./images/turkishSauna1.jpg','./images/turkishSauna2.jpg', './images/turkishSauna3.jpg']
+              ]; 
+
+  if(parentOfModule != null){
+      getGallery('#group')
+  }
+
+}
 

@@ -2,8 +2,9 @@
 
 module.exports = () => {
 
-  function getTable(){
 let blockSortBy = document.getElementById('sortByClick');
+
+  function getTable(){
 blockSortBy.insertAdjacentHTML('afterbegin', `
   		<table id = 'tblSortByClick' class = 'middle table table-bordered'>
 		<tr class = 'trSort'><th class = 'thSort'>Name</th><th class = 'thSort'>dateOfSomething</th><th class = 'thSort'>Plants</th><th class = 'thSort'>num</th></tr>
@@ -17,10 +18,9 @@ blockSortBy.insertAdjacentHTML('afterbegin', `
 `)
 
 }
-getTable();
 
 
-startSortByClick();
+
 
 function startSortByClick(){
   let tds = document.querySelectorAll('.tdSort');
@@ -134,5 +134,9 @@ function startSortByClick(){
 }
 
 
+if(blockSortBy != null){
+      getTable();
+      startSortByClick();
+}
 
 }

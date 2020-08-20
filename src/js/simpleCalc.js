@@ -4,7 +4,8 @@ module.exports = () => {
 
 let simpleCalc = document.getElementById('simpleCalc');
 
-simpleCalc.insertAdjacentHTML('afterbegin', `
+function getCalc(){
+  simpleCalc.insertAdjacentHTML('afterbegin', `
     <table id = 'tblCalc'>
       <tr>
         <th>C</th>
@@ -14,9 +15,8 @@ simpleCalc.insertAdjacentHTML('afterbegin', `
 		<p id='infoCalc'></p>
 `);
 
+  }
 
-	let collector = '';
-  getHigthFromTop();
 
 function getHigthFromTop(){
 	let inp = document.getElementById('inpCalc');			
@@ -34,6 +34,12 @@ function getHigthFromTop(){
                     arr.pop();
                     elem.innerHTML = arr.join('');
                 }
+  
+                function createEl(tag, par){		
+                  let el = document.createElement(tag);	
+                    par.appendChild(el);
+                    return el;
+                }		
 
 
                 function getTbl(elem, arr){				
@@ -94,12 +100,11 @@ function getHigthFromTop(){
 
 }
 
-function createEl(tag, par){		
-	let el = document.createElement(tag);	
-		par.appendChild(el);
-		return el;
-}		
-
+if(simpleCalc != null){
+	let collector = '';
+  getCalc();
+  getHigthFromTop();
+}
 
 
 }

@@ -2,10 +2,10 @@
 
 module.exports = () => {
 
+let blockSpiral = document.getElementById('blockSpiral');
+  
+function getHTML(){
 
-  function getHTML(){
-
-    let blockSpiral = document.getElementById('blockSpiral');
     blockSpiral.insertAdjacentHTML('afterbegin', 
           `<input id='putCols' placeholder='put int number < 16' >
             <input type='submit' id='buttTableSpiral'>
@@ -15,8 +15,6 @@ module.exports = () => {
 
   }
 
-getHTML();
-startProcess();
 
 function startProcess(){
   let butt = document.getElementById('buttTableSpiral');
@@ -115,6 +113,11 @@ function startProcess(){
             return tempArr;
         }
 
+        function createEl(tag, par ){		
+          let el = document.createElement(tag);	
+            par.appendChild(el);
+            return el;
+        }		
 
         function createPlus(start, rows, diff){
           let tempArr = [];
@@ -138,19 +141,9 @@ function startProcess(){
 
 
 
-
-
-
-
-
-
-
-
-function createEl(tag, par ){		
-	let el = document.createElement(tag);	
-		par.appendChild(el);
-		return el;
-}		
-
+  if(blockSpiral != null){
+    getHTML();
+    startProcess();
+  }
 
 }

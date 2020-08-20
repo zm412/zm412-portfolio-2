@@ -2,9 +2,10 @@
 
 module.exports = () => {
 
+  let transpose = document.getElementById('transpose');
+
   function getTable(){
 
-  let transpose = document.getElementById('transpose');
   transpose.insertAdjacentHTML('afterbegin', `
 		<input id = 'rowsTableTranspose' placeholder = 'int <= 15'><br>
 		<input id = 'columnsTableTranspose' placeholder = 'int <= 15'><br>
@@ -20,8 +21,6 @@ module.exports = () => {
 
   } 
 
-getTable();
-startActionTranspose();
 		
 	
 function startActionTranspose(){
@@ -119,6 +118,12 @@ function startActionTranspose(){
                     return tempArr;
                   }
 
+                  function createEl(tag, par ){		
+                    let el = document.createElement(tag);	
+                      par.appendChild(el);
+                      return el;
+                  }		
+
                   function putTogether(arr1, arr2){
                     let elems = document.querySelectorAll('.cells')
                     for(let i = 0; i < elems.length; i++){
@@ -131,17 +136,12 @@ function startActionTranspose(){
 
                   }	
 
-
-
-
-
 }
 
-function createEl(tag, par ){		
-	let el = document.createElement(tag);	
-		par.appendChild(el);
-		return el;
-}		
 
 
+  if(transpose != null){
+      getTable();
+      startActionTranspose();
+  }
 }

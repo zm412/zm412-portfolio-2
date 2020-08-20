@@ -1,54 +1,53 @@
 'use strict'
 
 module.exports = () =>{
+
 let game = document.getElementById('gameX0');
-  if(game != null)
-game.insertAdjacentHTML('afterbegin', `
-  <style>
-   #gameX0#tblGameX0{
-		position: absolute; 
-			top: 30%; 
-			left: 35%; 
-			width: 25%; 
-			height: 25%; 
-	}
+
+  function getGame(){
+
+    game.insertAdjacentHTML('afterbegin', `
+        <style>
+         #gameX0#tblGameX0{
+          position: absolute; 
+            top: 30%; 
+            left: 35%; 
+            width: 25%; 
+            height: 25%; 
+        }
+        
+        .tdGameX0 {
+          width: 30px;
+          height: 25px;
+        }
+       
+        table {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+
+        td, th{
+          text-align: center;
+          border: 1px solid black;
+        }
+
+
+            
+            </style>
+            <table id = 'tblGameX0' class="middle"></table>
+              </div>
+              <div>	<p> Winner in this Game: <span id = 'who'></span></p>
+                  <button id = 'buttGameX0'>Start again</button>
+              </div>
+                  <div class = 'secBlock'>
+                        <p> Won X:<span id = 'winX'></span></p>
+                        <p> Won 0:<span id = 'win0'></span></p>
+                        <p> Draw:<span id = 'noWins'></span></p>
+                  </div>	
+          `);
+  }
+
   
-	.tdGameX0 {
-		width: 30px;
-		height: 25px;
-  }
- 
-  table {
-		border: 1px solid black;
-		border-collapse: collapse;
-  }
-
-  td, th{
-		text-align: center;
-		border: 1px solid black;
-  }
-
-
-	
-  </style>
-  <table id = 'tblGameX0' class="middle"></table>
-		</div>
-		<div>	<p> Winner in this Game: <span id = 'who'></span></p>
-				<button id = 'buttGameX0'>Start again</button>
-    </div>
-        <div class = 'secBlock'>
-              <p> Won X:<span id = 'winX'></span></p>
-              <p> Won 0:<span id = 'win0'></span></p>
-              <p> Draw:<span id = 'noWins'></span></p>
-        </div>	
-`)
-
-
-
-startGame();
-
-let result = [];
-
 function startGame(){
 
   let tbl = document.getElementById('tblGameX0');
@@ -135,16 +134,21 @@ function startGame(){
                       }
                     }
 
+                      function createEl(tag, par ){		
+                        let el = document.createElement(tag);	
+                          par.appendChild(el);
+                          return el;
+                      }		
+
+  }
 
 
-                    }
+let result = [];
 
-function createEl(tag, par ){		
-	let el = document.createElement(tag);	
-		par.appendChild(el);
-		return el;
-}		
-
+  if(game != null){
+      getGame();
+      startGame();
+  }
 
 
 }

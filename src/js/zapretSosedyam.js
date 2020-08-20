@@ -3,12 +3,11 @@
 module.exports = () => {
 
 
+let zapretSosedyam = document.getElementById('zapretSosedyam');
 
-let zapretSos = function(parentId, idTable, classTh, classTr, classTd){
+  function getZapretSosedyam(){
 
-
-let zapretSosedyam = document.getElementById(parentId);
-zapretSosedyam.insertAdjacentHTML('afterbegin', `
+    zapretSosedyam.insertAdjacentHTML('afterbegin', `
               <table id = 'tblZapretSosedyam'  class = 'middle table table-bordered'>
               <tr class = 'trZapret'><th class = 'thZapret'>Name</th><th class = 'thZapret'>date</th><th class = 'thZapret'>Plants</th><th class = 'thZapret'>num</th><th class = 'thZapret'>num</th></tr>
               <tr class = 'trZapret'><td class = 'tdZapret'>Mila</td><td class = 'tdZapret'>10/18/2002</td><td class = 'tdZapret'>mango</td><td class = 'tdZapret'>23</td><td class = 'tdZapret'>23</td></tr>
@@ -20,15 +19,18 @@ zapretSosedyam.insertAdjacentHTML('afterbegin', `
 			</table>
 `);
 
+  }
 
-        let tbl = document.getElementById(idTable);
+  function startAction(){
+
+        let tbl = document.getElementById('tblZapretSosedyam');
         tbl.onclick = funcZapretSosedyam;
+        let tds = tbl.querySelectorAll('.tdZapret');
+        let ths = tbl.querySelectorAll('.thZapret');
+        let trs = tbl.querySelectorAll('.trZapret');
         putColsNumbers();
 
         function funcZapretSosedyam(event){	
-          let tds = tbl.querySelectorAll(classTd);
-          let ths = tbl.querySelectorAll(classTh);
-          let trs = tbl.querySelectorAll(classTr);
           if(event.target.tagName != 'TD') return;
             event.target.style.color = 'red';
           let numberNum = event.target.dataset.num;
@@ -55,8 +57,6 @@ zapretSosedyam.insertAdjacentHTML('afterbegin', `
           
           
         function putColsNumbers(){
-          let trs = tbl.querySelectorAll(classTr);
-
           for(let i = 1; i < trs.length; i++){
             let tds2 = trs[i].querySelectorAll('td');
             for(let j = 0; j < tds2.length; j++){
@@ -67,8 +67,11 @@ zapretSosedyam.insertAdjacentHTML('afterbegin', `
         }
 
 
-}
+  }
 
-zapretSos('zapretSosedyam','tblZapretSosedyam', '.thZapret', '.trZapret', '.tdZapret')
+  if(zapretSosedyam != null){
+    getZapretSosedyam();
+    startAction();
+  }
 
 }
