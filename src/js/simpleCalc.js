@@ -1,16 +1,22 @@
 'use strict'
 
+module.exports = () => {
+
 let simpleCalc = document.getElementById('simpleCalc');
+
 simpleCalc.insertAdjacentHTML('afterbegin', `
-		<table id = 'tblCalc'>
-    <tr><th>C</th><th id = 'double' colspan = '3'><input type = 'text' id = 'inpCalc' ></th></tr>
+    <table id = 'tblCalc'>
+      <tr>
+        <th>C</th>
+        <th id='double' colspan='3'><input type='text' id='inpCalc'></th>
+      </tr>
 		</table>
-		<p id = 'infoCalc'></p>
+		<p id='infoCalc'></p>
 `);
 
 
 	let collector = '';
-getHigthFromTop();
+  getHigthFromTop();
 
 function getHigthFromTop(){
 	let inp = document.getElementById('inpCalc');			
@@ -88,4 +94,12 @@ function getHigthFromTop(){
 
 }
 
+function createEl(tag, par){		
+	let el = document.createElement(tag);	
+		par.appendChild(el);
+		return el;
+}		
 
+
+
+}

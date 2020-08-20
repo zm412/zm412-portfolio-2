@@ -1,30 +1,37 @@
 'use strict'
 
-let transpose = document.getElementById('transpose');
-transpose.insertAdjacentHTML('afterbegin', `
-		<input id = 'rows' placeholder = 'int <= 15'><br>
-		<input id = 'columns' placeholder = 'int <= 15'><br>
-		<div id = 'elem'>
+module.exports = () => {
+
+  function getTable(){
+
+  let transpose = document.getElementById('transpose');
+  transpose.insertAdjacentHTML('afterbegin', `
+		<input id = 'rowsTableTranspose' placeholder = 'int <= 15'><br>
+		<input id = 'columnsTableTranspose' placeholder = 'int <= 15'><br>
+		<div id = 'elemTableTranspose'>
       
 				<table id = 'transposeTbl' class = 'middle '></table></div><br>
 
-    <p id = 'err'></p>
+    <p id = 'errTableTranspose'></p>
     <button id = 'buttCreateTbl'>Create table </button>
     <button id = 'flipTbl'> Flip </button>
-    <button id = 'reset'> Reset </button>
+    <button id = 'resetTableTranspose'> Reset </button>
 `);
 
+  } 
+
+getTable();
 startActionTranspose();
 		
 	
 function startActionTranspose(){
   let tbl = document.getElementById('transposeTbl');
-  let pErr = document.getElementById('err');
+  let pErr = document.getElementById('errTableTranspose');
   let buttCreateTable = document.getElementById('buttCreateTbl');
   let buttFlipTable = document.getElementById('flipTbl');
-  let buttReset = document.getElementById('reset');
-  let rows = document.getElementById('rows');
-  let cols = document.getElementById('columns');
+  let buttReset = document.getElementById('resetTableTranspose');
+  let rows = document.getElementById('rowsTableTranspose');
+  let cols = document.getElementById('columnsTableTranspose');
     let rowsChangeble;
     let colsChangeble;
     let inners;
@@ -32,7 +39,7 @@ function startActionTranspose(){
 
 		buttCreateTable.addEventListener('click', function(){
        rowsChangeble = Number(rows.value);
-       colsChangeble =Number(cols.value);
+       colsChangeble = Number(cols.value);
 
           if(rowsChangeble > 15 || colsChangeble > 15){
             pErr.innerHTML = 'Error!: rows and columns have to be <=  15';
@@ -130,3 +137,11 @@ function startActionTranspose(){
 
 }
 
+function createEl(tag, par ){		
+	let el = document.createElement(tag);	
+		par.appendChild(el);
+		return el;
+}		
+
+
+}

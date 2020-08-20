@@ -3,6 +3,7 @@ module.exports = () => {
   function getGallery(par){
 
   let parentOfModule = document.querySelector(par);
+    if(parentOfModule == null) return new Error;
   parentOfModule.insertAdjacentHTML('afterbegin', `
         <div class="tabs">
           <div id = 'unic' class ="tabD">

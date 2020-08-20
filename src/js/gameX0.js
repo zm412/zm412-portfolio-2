@@ -2,7 +2,7 @@
 
 module.exports = () =>{
 let game = document.getElementById('gameX0');
-  if(game == null) return  new Error ;
+  if(game != null)
 game.insertAdjacentHTML('afterbegin', `
   <style>
    #gameX0#tblGameX0{

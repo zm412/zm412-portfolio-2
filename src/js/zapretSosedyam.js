@@ -1,5 +1,8 @@
 'use strict'
 
+module.exports = () => {
+
+
 
 let zapretSos = function(parentId, idTable, classTh, classTr, classTd){
 
@@ -15,7 +18,7 @@ zapretSosedyam.insertAdjacentHTML('afterbegin', `
               <tr class = 'trZapret'><td class = 'tdZapret'>Tanya</td><td class = 'tdZapret'>11/15/1996</td><td class = 'tdZapret'>peach</td><td class = 'tdZapret'>13</td><td class = 'tdZapret'>23</td></tr>
               <tr class = 'trZapret'><td class = 'tdZapret'>Sofia</td><td class = 'tdZapret'>05/15/2001</td><td class = 'tdZapret'>yukka</td><td class = 'tdZapret'>25</td><td class = 'tdZapret'>23</td></tr>
 			</table>
-`)
+`);
 
 
         let tbl = document.getElementById(idTable);
@@ -68,4 +71,4 @@ zapretSosedyam.insertAdjacentHTML('afterbegin', `
 
 zapretSos('zapretSosedyam','tblZapretSosedyam', '.thZapret', '.trZapret', '.tdZapret')
 
-
+}

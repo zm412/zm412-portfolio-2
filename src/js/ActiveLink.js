@@ -9,7 +9,7 @@ class ActiveLink{
   }
 
   proc(){
-    if(this.eventEleme == null) return new Error;
+    if(this.eventElem != null){
 
     this.eventElem.addEventListener('click', event => {
       if(event.target.tagName != 'A') return;
@@ -19,11 +19,13 @@ class ActiveLink{
           if(aes[i].innerHTML == event.target.innerHTML){
             aes[i].closest(this.parentSelector).classList.add('active');
 
-          }else{
+          }
+          else{
             aes[i].closest(this.parentSelector).classList.remove('active')
           }
     }
   });
+  }
   }
 
 

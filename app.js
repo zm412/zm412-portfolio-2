@@ -26,7 +26,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 
 app.use(bodyParser.urlencoded({extended: true}));
-console.log(path.join(__dirname, 'public'))
 
 app.post('/about', (req, res) => {
   if(!req.body) return res.sendStatus(400);
@@ -111,9 +110,14 @@ app.post('/contacts', (req, res) => {
 app.get(/\/|\/index/, function (req, res){
   let name = req.url.slice(1);
   name == '' ? name = 'index' : name = name;
-  console.log(__dirname)
       res.render(name, { title:'HOME',});
 });
+
+app.get('/favicon.ico', function (req, res){
+  res.status(404)
+  console.log('/favicon.ico')
+});
+
 
 
 app.get('/about', function (req, res){

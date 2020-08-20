@@ -1,5 +1,8 @@
 'use strict'
 
+module.exports = () => {
+
+  function getTable(){
 let blockSortBy = document.getElementById('sortByClick');
 blockSortBy.insertAdjacentHTML('afterbegin', `
   		<table id = 'tblSortByClick' class = 'middle table table-bordered'>
@@ -13,7 +16,8 @@ blockSortBy.insertAdjacentHTML('afterbegin', `
 			</table>
 `)
 
-
+}
+getTable();
 
 
 startSortByClick();
@@ -131,3 +135,4 @@ function startSortByClick(){
 
 
 
+}

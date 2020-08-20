@@ -1,18 +1,25 @@
 'use strict'
 
+module.exports = () => {
 
-let blockSpiral = document.getElementById('blockSpiral');
-blockSpiral.insertAdjacentHTML('afterbegin', 
-          `<input id='putCols' placeholder = 'put int number < 16' >
-            <input type='submit' id='butt'>
-                <div id = 'elem'>
-                  <table id = 'tblSpiral' class = 'middle'></table>
+
+  function getHTML(){
+
+    let blockSpiral = document.getElementById('blockSpiral');
+    blockSpiral.insertAdjacentHTML('afterbegin', 
+          `<input id='putCols' placeholder='put int number < 16' >
+            <input type='submit' id='buttTableSpiral'>
+                <div id='elemTableSpiral'>
+                  <table id='tblSpiral' class='middle'></table>
                 </div>`);
 
+  }
+
+getHTML();
 startProcess();
 
 function startProcess(){
-  let butt = document.getElementById('butt');
+  let butt = document.getElementById('buttTableSpiral');
 
   butt.addEventListener('click', function(){
   let tblSpiral = document.getElementById('tblSpiral');
@@ -146,3 +153,4 @@ function createEl(tag, par ){
 }		
 
 
+}
