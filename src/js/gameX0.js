@@ -1,6 +1,8 @@
 'use strict'
 
+module.exports = () =>{
 let game = document.getElementById('gameX0');
+  if(game == null) return  new Error ;
 game.insertAdjacentHTML('afterbegin', `
   <style>
    #gameX0#tblGameX0{
@@ -137,4 +139,12 @@ function startGame(){
 
                     }
 
+function createEl(tag, par ){		
+	let el = document.createElement(tag);	
+		par.appendChild(el);
+		return el;
+}		
 
+
+
+}

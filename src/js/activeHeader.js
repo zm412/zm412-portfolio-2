@@ -1,10 +1,12 @@
 'use strict'
 
-let links = document.querySelectorAll('.icon a');
+module.exports = () => {
+
+let links = document.querySelectorAll('.headactive');
 console.log(links);
 for(let link of links){
-  console.log(link);
   if(link.href == window.location.href){
     link.classList.add('active');
   }
+}
 }

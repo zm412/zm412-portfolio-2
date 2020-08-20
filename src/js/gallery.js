@@ -1,8 +1,9 @@
-let getGallery = function (par){
-  
+
+module.exports = () => {
+  function getGallery(par){
+
   let parentOfModule = document.querySelector(par);
   parentOfModule.insertAdjacentHTML('afterbegin', `
-
         <div class="tabs">
           <div id = 'unic' class ="tabD">
             <div class='num'></div>
@@ -26,20 +27,21 @@ let getGallery = function (par){
           <a href="#" class = 'view'></a>
         <button id = 'next'>&#10095</button>
         </div>
-
     `);
-  
 
 
 
 
-    document.body.onload = startAction;
+
 
 
 let arr = ['Русская баня','Римская баня', 'Финская баня',  'Японская баня', 'Инфракрасная', 'Скандинавская', 'Турецкая сауна'];
-let arrTb = [
-		['/../public/images/rusSauna1.jpg','/../public/images/rusSauna2.jpg', '/../public/images/rusSauna3.jpg'],['/../public/images/rimSauna1.jpg','/../public/images/rimSauna2.jpg', '/../public/images/rimSauna3.jpg'], ['/../public/images/finnSauna1.jpg','/../public/images/finnSauna2.jpg', '/../public/images/finnSauna3.jpg'], ['/../public/images/japanSauna1.jpg','/../public/images/japanSauna2.jpg', '/../public/images/japanSauna3.jpg'],['/../public/images/infraSauna1.jpg','/../public/images/infraSauna2.jpg', '/../public/images/infraSauna3.jpg'], ['/../public/images/scandinavianSauna1.jpg','/../public/images/scandinavianSauna2.jpg', '/../public/images/scandinavianSauna3.jpg'],['/../public/images/turkishSauna1.jpg','/../public/images/turkishSauna2.jpg', '/../public/images/turkishSauna3.jpg']
-	]; 
+ 
+      let arrTb = [
+        ['./images/rusSauna1.jpg','./images/rusSauna2.jpg', './images/rusSauna3.jpg'],['./images/rimSauna1.jpg','./images/rimSauna2.jpg', './images/rimSauna3.jpg'], ['./images/finnSauna1.jpg','./images/finnSauna2.jpg', './images/finnSauna3.jpg'], ['./images/japanSauna1.jpg','./images/japanSauna2.jpg', './images/japanSauna3.jpg'],['./images/infraSauna1.jpg','./images/infraSauna2.jpg', './images/infraSauna3.jpg'], ['./images/scandinavianSauna1.jpg','./images/scandinavianSauna2.jpg', './images/scandinavianSauna3.jpg'],['./images/turkishSauna1.jpg','./images/turkishSauna2.jpg', './images/turkishSauna3.jpg']
+              ]; 
+
+    
 
 function startAction(){
 	let menuGallery = document.querySelector('.menuGallery');
@@ -71,7 +73,7 @@ function startAction(){
                     let pos = arr.indexOf(aes[i].innerHTML, 0);
                     meaningForImg(arrTb, pos, pic);
                   }else{
-                    aes[i].classList.remove('active');	
+                    aes[i].classList.remove('active');
                   }
                 }
               }
@@ -79,7 +81,7 @@ function startAction(){
               function putMeaning(arr, arr1, startPosition){
                 let views = document.querySelectorAll('.view');
                 let pic = document.getElementById('pic');
-                
+
                 for(let i = startPosition, j = 0; i < startPosition + 4; i++, j++){
                   arr[i] == undefined ? i = 0 : false;
                   if(j >= 4) return;
@@ -103,7 +105,7 @@ function startAction(){
                   localPositionActive > 0 ? localPositionActive--: localPositionActive = arr[pos].length - 1;
                   getResult(pos, localPositionActive, dotes, elem, arr);
                 });
-                
+
                 nextTb.addEventListener('click', function(){
                   localPositionActive >= arr[pos].length - 1  ? localPositionActive = 0 : localPositionActive++;
                   getResult(pos, localPositionActive, dotes, elem, arr);
@@ -123,7 +125,7 @@ function startAction(){
                     elemShow.src = arr[positionDotes][i];
                   });
                 }
-              } 
+              }
 
               function getActive(elems, posD){
                 let numText = document.querySelector('.num');
@@ -136,10 +138,10 @@ function startAction(){
 
 
 
+}
 
-
-	}	
-  };
-
+    startAction();
+	}
 getGallery('#group')
+  };
 

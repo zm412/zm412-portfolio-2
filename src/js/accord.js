@@ -10,6 +10,11 @@ third - selector of elem, where we gonna add (or remove), class 'active'
 
  */
 
-let accord = new ActiveLink('.linkTo a', '#accord','.task');
-accord.proc();
+
+module.exports = () => {
+  let Accord = require('./ActiveLink');
+  let accord = new Accord('.linkTo a', '#accord','.task');
+  accord.proc();
+}
+
 

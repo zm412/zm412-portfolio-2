@@ -9,6 +9,7 @@ class ActiveLink{
   }
 
   proc(){
+    if(this.eventEleme == null) return new Error;
 
     this.eventElem.addEventListener('click', event => {
       if(event.target.tagName != 'A') return;
@@ -27,3 +28,5 @@ class ActiveLink{
 
 
 }
+
+module.exports = ActiveLink;

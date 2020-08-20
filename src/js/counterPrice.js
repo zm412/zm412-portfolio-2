@@ -1,7 +1,10 @@
 
-let getPriceOfSauna = function(par){
+module.exports = () => {
+  function countPrice(par){
   let parentOfModule = document.querySelector(par);
-  parentOfModule.insertAdjacentHTML('afterbegin', `
+    if(parentOfModule == null) return new Error;
+
+    parentOfModule.insertAdjacentHTML('afterbegin', `
 
            <div id = 'rightBl'>
             <form id = 'form'>
@@ -37,7 +40,7 @@ let getPriceOfSauna = function(par){
     </fieldset>
             </form>
           </div>
-  `)
+  `);
   
 
 
@@ -65,8 +68,8 @@ let saunaTypesAndPrices = {
 let radioSet = document.getElementById('radioSet');
 generateRadioSet(radioSet, saunaTypesAndPrices);
 let radio = document.querySelectorAll('.typeSauna');
-let body = document.body;
-body.onload = startAction();
+
+startAction();
 
 function startAction(){
 	let priceR = document.getElementById('priceR');
@@ -189,7 +192,6 @@ function getChecked(elems){
 
 };
 
-getPriceOfSauna('#countPrice');
+countPrice('#countPrice')
 
-
-
+}
