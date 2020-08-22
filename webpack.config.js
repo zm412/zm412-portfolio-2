@@ -8,14 +8,28 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: [ './main.js', './main.scss'],
   output: {
-    path: path.resolve(__dirname, 'public')
+    path: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js'
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      '@img': path.resolve(__dirname, 'src/img'),
+      '@js': path.resolve(__dirname, 'src/js'),
+      '@scss': path.resolve(__dirname, 'src/scss'),
+    }
   },
   module:{
     rules:[
       {
         test: /.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader:{
+          loader:'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        } 
       },
       {
         test: /.(scss|css)$/,
@@ -30,6 +44,14 @@ module.exports = {
           'postcss-loader',
           'sass-loader'
         ]
+      },
+
+      {
+        test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]'
+        }
       }
     ]
   },

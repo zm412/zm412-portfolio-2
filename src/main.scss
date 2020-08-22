@@ -29,13 +29,17 @@ body {
   padding-top: $headerHeight + $freeSpace;
 }
 
-@import './scss/header';
-@import './scss/inBody';
-@import './scss/footer';
-@import './scss/accord';
-@import './scss/gallery';
-@import './scss/gameX0';
-@import './scss/zapretSosedyam';
+@import '@scss/header';
+@import '@scss/inBody';
+@import '@scss/footer';
+@import '@scss/accord';
+@import '@scss/gallery';
+@import '@scss/gameX0';
+@import '@scss/zapretSosedyam';
+@import '~normalize.css';
+//@import '@img/logo.png';
+//@import "~bootstrap/scss/bootstrap";
+
 //@import 'components/post';
 //@import 'components/auth';
 
