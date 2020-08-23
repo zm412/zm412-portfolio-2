@@ -9,7 +9,13 @@ const sortByClick= require('@js/sortByClick');
 const tableSpiral= require('@js/tableSpiral');
 const tableTranspose = require('@js/tableTranspose');
 const zapretSosedyam = require('@js/zapretSosedyam');
-//import logoType from '@img/logo.png';
+
+const logo = require('@img/logo.png')
+
+//import logo from '@img/logo.png';
+//
+
+import '@/main.scss';
 
 activeHeaderLinks();
 accord();

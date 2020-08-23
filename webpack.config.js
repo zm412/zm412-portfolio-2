@@ -22,7 +22,7 @@ module.exports = {
   module:{
     rules:[
       {
-        test: /.(js|jsx)$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader:{
           loader:'babel-loader',
@@ -32,35 +32,38 @@ module.exports = {
         } 
       },
       {
-        test: /.(scss|css)$/,
+        test: /\.(scss|css)$/,
         exclude: /node_modules/,
-        use: [{
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            reloadAll: true
-          }
-        },
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader ,
+            options: {
+              reloadAll: true
+            }
+          },
+          
           'css-loader',
           'postcss-loader',
           'sass-loader'
         ]
       },
-
       {
-        test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+        test: /\.(png|jpe?g|svg|ttf|eot|woff|woff2)$/,
         loader: 'file-loader',
         options: {
-          name: '[path][name].[ext]'
+         name: '[name].[ext]',
+         outputPath: 'img'
         }
       }
-    ]
+   ]
   },
   plugins:[
     new MinifyPlugin({}, {
       comments: false
     }),
+
     new MiniCssExtractPlugin({
-      filename: '[name].css'
+      filename: 'style.css'
     })
   ]
 
