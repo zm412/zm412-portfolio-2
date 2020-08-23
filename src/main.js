@@ -10,7 +10,9 @@ const tableSpiral= require('@js/tableSpiral');
 const tableTranspose = require('@js/tableTranspose');
 const zapretSosedyam = require('@js/zapretSosedyam');
 
-const logo = require('@img/logo.png')
+const logo = require('@img/logo.png');
+const whiteLogo = require('@img/whiteLogo.png');
+const bgPic = require('@img/bgBody.jpg');
 
 //import logo from '@img/logo.png';
 //

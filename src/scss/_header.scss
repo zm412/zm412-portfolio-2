@@ -18,20 +18,19 @@
     padding: 0 $freeSpace 0 $freeSpace;
 
     .logo {
-      background-image: url('./img/logo.png');
+      background-image: url('./img/whiteLogo.png');
       background-repeat: no-repeat;
-      background-size: cover;
+      background-size: contain;
       background-position: center;
-      width: 150px;
+      width: 100px;
       height: 100%;
-      margin-top: 3px;
     }
 
     .menu {
       display: flex;
       list-style: none;
       height: 100%;
-      align-items: center;
+      //align-items: center;
 
       li {
         a {

@@ -25,8 +25,9 @@ body {
   flex-direction: column;
   flex: auto;
   color: $blackColor;
-  background-color: lighten($greyColor, 7);
+  background-image: url('./img/bgBody.jpg');
   padding-top: $headerHeight + $freeSpace;
+//  background-color: lighten($greyColor, 7);
 }
 
 @import '@scss/header';
