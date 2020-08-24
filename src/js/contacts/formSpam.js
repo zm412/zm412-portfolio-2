@@ -1,7 +1,10 @@
-  <div class='row'>
- 
-    <div class='col-lg-4  col-md-6 col-sm-12' id='blockComments'>
 
+module.exports = () => {
+  let formSpam = document.querySelector('.formSpam');
+  
+  function getFormForSpam(){
+    formSpam.insertAdjacentHTML('afterbegin', `
+      
               <form method='post' action='contacts' class="was-validated formSpam">
           <div class="form-group">
             <label for="exampleFormControlInput1">Name/Username</label>
@@ -20,34 +23,14 @@
           </div>
         </form>
 
-
-  </div>
-
-    <div class='col-lg-4 col-md-6 col-sm-12' >
-    <p> {{isComment}}</p><hr>
-  <ul>
-    <li>
+      `)
+  }
 
 
-      {{#each posts}}
+  function startAction(){
+    let buttSpam = document.querySelector('#buttForComment');
+    buttSpam.addEventListener('click', (e) => {
+      e.preventDefault(); })
 
-            <h4>{{this.name}}</h4><br>
-
-            <p> {{this.body}} </p>
-
-      {{/each}}
-
-      <hr>
-    </li>
-  </ul>
-
-    </div>
-
-    <div class='col-lg-4 col-md-12 col-sm-12 getAuth' >
-
-  </div>
-  </div>
- 
-
-
-
+  }
+}
