@@ -11,11 +11,11 @@ module.exports = () => {
       <div class='blockAuth'>
         <div class="form-group">
           <label for="login-login">Login</label>
-          <input id="login-login" type="text" class="form-control"  name="loginAuth" />
+          <input id="login-login" type="text" class="form-control"  name="login" />
         </div>
         <div class="form-group">
           <label for="login-password">Password</label>
-          <input id="login-password" type="text" class="form-control"  name="passwordAuth" />
+          <input id="login-password" type="text" class="form-control"  name="password" />
         </div>
 
         <div class="buttons">
@@ -91,9 +91,6 @@ module.exports = () => {
       
       let registerButt = document.querySelector('.register-button');
       registerButt.addEventListener('click', function(e){
-        console.log(document.querySelector('#register-login').value)
-        console.log(document.querySelector('#register-password').value)
-        console.log(document.querySelector('#register-password-confirm').value)
         e.preventDefault();
         let data = {
           login: document.querySelector('#register-login').value,
@@ -105,20 +102,47 @@ module.exports = () => {
         req.open('POST', '/api/auth/register', true);
         req.setRequestHeader('Content-Type', 'application/json');
         req.addEventListener('load', () => {
-          let answ = JSON.parse(req.responseText);
-          document.querySelector('.register').insertAdjacentHTML('afterbegin', `<p class='error'>${answ.error}</p>`)
 
-          if(answ.fields){
-            answ.fields.forEach(item => document.querySelector(`input[name=${item}]`).classList.add('border-danger'));
+            let answ = JSON.parse(req.responseText);
+          if(!answ.ok){
+
+            document.querySelector('.register').insertAdjacentHTML('afterbegin', `<p class='border-danger bg-warning' id='errorParagraph'>${answ.error}</p>`)
+
+              if(answ.fields){
+                answ.fields.forEach(item => document.querySelector(`.register input[name=${item}]`).classList.add('border-danger'));
+              }
+            
+        clearFocus();
+            
+          }else{
+            document.querySelector('.register').insertAdjacentHTML('afterbegin', `<p class='border-success bg-success' id='errorParagraph'>Very Well!</p>`);
           }
+
         });
         req.send(JSON.stringify(data));
 
       });
 
+
     }
 
 
+  function clearFocus(){
+
+    let inps = document.querySelectorAll('.register input');
+
+    inps.forEach(current => {
+          current.addEventListener('focus', () => {
+
+          inps.forEach(item => item.classList.remove('border-danger'));
+
+          let errParagraph = document.querySelector('#errorParagraph');
+            if(errParagraph != null){
+              errParagraph.parentNode.removeChild(errParagraph);
+            }
+    });
+  });
+  }
 
     
 
