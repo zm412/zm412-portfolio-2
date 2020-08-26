@@ -11,11 +11,11 @@ module.exports = () => {
       <div class='blockAuth'>
         <div class="form-group">
           <label for="login-login">Login</label>
-          <input id="login-login" type="text" class="form-control"  name="login">
+          <input id="login-login" type="text" class="form-control"  name="loginAuth" />
         </div>
         <div class="form-group">
           <label for="login-password">Password</label>
-          <input id="login-password" type="text" class="form-control"  name="password">
+          <input id="login-password" type="text" class="form-control"  name="passwordAuth" />
         </div>
 
         <div class="buttons">
@@ -32,20 +32,20 @@ module.exports = () => {
         <div class="form-group">
 
     <label for="register-login">Login</label>
-    <input id="register-login" type="text" class="form-control"  name="login">
+    <input id="register-login" type="text" class="form-control"  name="login" />
 
         </div>
         <div class="form-group">
 
     <label for="register-password">Password</label>
-    <input id="register-password" type="text" class="form-control"  name="password">
+    <input id="register-password" type="text" class="form-control"  name="password" />
 
         </div>
 
         <div class="form-group">
 
     <label for="register-password-confirm">Confirm password</label>
-    <input id="register-password-confirm" type="text" class="form-control"  name="passwordConfirm">
+    <input id="register-password-confirm" type="text" class="form-control"  name="passwordConfirm" />
 
         </div>
         <div class="buttons">
@@ -107,9 +107,12 @@ module.exports = () => {
         req.addEventListener('load', () => {
           let answ = JSON.parse(req.responseText);
           document.querySelector('.register').insertAdjacentHTML('afterbegin', `<p class='error'>${answ.error}</p>`)
+
+          if(answ.fields){
+            answ.fields.forEach(item => document.querySelector(`input[name=${item}]`).classList.add('border-danger'));
+          }
         });
         req.send(JSON.stringify(data));
-          console.log(req.body)
 
       });
 
