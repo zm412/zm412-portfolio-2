@@ -5,10 +5,10 @@ let mongoose = require('mongoose');
 module.exports = () => {
   return new Promise((resolve, reject) => {
     mongoose.Promise = global.Promise;
-    mongoose.set('debug', true);
+    mongoose.set('debug', config.IS_PRODUCTION);
 
     mongoose.connection
-    .on('error', error => reject(error))
+    .on('error', error => console.log(error))
     .on('close', () => console.log('Db connection closed'))
     .on('open', () => resolve(mongoose.connections[0]));
 

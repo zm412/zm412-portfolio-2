@@ -1,10 +1,10 @@
 
-require('dotenv').config();
 const fs = require('fs');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const config = require('./config');
+const routes = require('./routes');
 const database = require('./database');
 const CommPost = require('./models/comment');
 const Address = require('./models/addresses');
@@ -12,20 +12,13 @@ const expressHbs = require("express-handlebars");
 const hbs = require("hbs");
 
 let app = express();
-app.engine("hbs", expressHbs(
-    {
-        layoutsDir: "views/layouts", 
-        defaultLayout: "layout",
-        extname: "hbs"
-    }
-))
-app.set("view engine", "hbs");
-hbs.registerPartials(__dirname + "/views/partials");
-
-app.use(express.static(path.join(__dirname, 'public')))
-
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/api/auth', routes.auth);
 
 app.post('/about', (req, res) => {
   if(!req.body) return res.sendStatus(400);
@@ -62,7 +55,6 @@ app.get('/contacts', function (req, res){
 
   })
 });
-
 
 app.post('/contacts', (req, res) => {
   if(!req.body) return res.sendStatus(400);
@@ -147,5 +139,20 @@ app.get('/test', function (req, res){
 app.get('/test/:id', function(req, res){
   req.render('test')
 })
+app.use((req, res, next) => {
+  const err = new Error('Not found');
+  err.status = '404';
+  next(err);
+})
+
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.render('404', {
+    message:error.message,
+    error: !config.IS_PRUDUCTION ? error : {},
+    title: 'Error...'
+  })
+});
+
 
 module.exports = app;
