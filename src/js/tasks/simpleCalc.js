@@ -3,6 +3,7 @@
 module.exports = () => {
 
 let simpleCalc = document.getElementById('simpleCalc');
+let collector;
 
 function getCalc(){
   simpleCalc.insertAdjacentHTML('afterbegin', `
