@@ -68,6 +68,10 @@ module.exports = () => {
     switchButton.addEventListener('click', function(event){
       event.preventDefault();
 
+      let inps = document.querySelectorAll('.register input');
+      inps.forEach(item => item.value = '');
+
+
       if(flag){
         flag = false;
         registerForm.style.display = 'inline';
@@ -119,6 +123,7 @@ module.exports = () => {
           }
 
         });
+        
         req.send(JSON.stringify(data));
 
       });

@@ -16,11 +16,26 @@ router.post('/register', (req, res) => {
   let passwordConfirm = req.body.passwordConfirm;
 
   if(!login || !password || !passwordConfirm){
+    
+        let fields = [];
+        if(!login) fields.push('login');
+        if(!password) fields.push('password');
+        if(!passwordConfirm) fields.push('passwordConfirm');
+
     res.json({
       ok: false,
       error: 'Empty fields!!!',
-      fields: ['login', 'password', 'passwordConfirm']
+      fields: fields 
     });
+    
+  } else if(!/^[a-zA-Z0-9]+$/.test(login)){
+    
+    res.json({
+      ok: false,
+      error: 'Please, use just english letters or numbers',
+      fields: ['login']
+    });
+
 
   } else if(login.length < 3 || login.length > 16){
     res.json({
@@ -33,6 +48,12 @@ router.post('/register', (req, res) => {
       ok: false,
       error: 'Passwords are not equal!',
       fields: ['password', 'passwordConfirm']
+    });
+   } else if(password.length < 5){
+    res.json({
+      ok: false,
+      error: 'Length of password has not to be less, then 5 symbols',
+      fields: ['password']
     });
     
   }else{
