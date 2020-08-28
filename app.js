@@ -6,10 +6,9 @@ const bodyParser = require('body-parser');
 const config = require('./config');
 const routes = require('./routes');
 const database = require('./database');
-const CommPost = require('./models/comment');
-const Address = require('./models/addresses');
 const expressHbs = require("express-handlebars");
 const hbs = require("hbs");
+const models = require('./models');
 
 let app = express();
 
@@ -25,11 +24,11 @@ app.post('/about', (req, res) => {
   let addressIs;
   
   
-  Address.find({email: req.body.email}, (err, doc) => {
+  models.Address.find({email: req.body.email}, (err, doc) => {
     if(err) console.log(err);
     if(doc.length == 0){
       addressIs = 'Ваш адрес только что внесен в базу данных MongoDb для ежегодной новостной рассылки. Поздравляем!!!'; 
-      Address.create({email: req.body.email, check: req.body.check, moreInfo: req.body.moreInfo}, (err, doc) => {});
+      models.Address.create({email: req.body.email, check: req.body.check, moreInfo: req.body.moreInfo}, (err, doc) => {});
     }else{
       addressIs = "Ваш электронный адрес (" + req.body.email + ") уже есть в списке на ежегодную рассылку! Подписка произведена " + doc[0].date; 
     }
@@ -45,7 +44,7 @@ app.post('/about', (req, res) => {
 app.get('/contacts', function (req, res){
   let isComment = '';
 
-  CommPost.find({}).then(posts => {
+  models.Comm.find({}).then(posts => {
     let name = req.url.slice(1);
       res.render(name, { 
         title: name,
@@ -60,12 +59,12 @@ app.post('/contacts', (req, res) => {
   if(!req.body) return res.sendStatus(400);
           
                           async function getOrder(){
-                           try{ await CommPost.create({
+                           try{ await models.Comm.create({
                                     name: req.body.nameForComment,
                                     body: req.body.texarForComment
                                   });
 
-                          CommPost.find({}).then(posts => {
+                          models.Comm.find({}).then(posts => {
                               res.render('contacts', { 
                                 title: 'contacts',
                                 posts: posts,
@@ -80,14 +79,14 @@ app.post('/contacts', (req, res) => {
 
    let isComment;
   
-  CommPost.find({name: req.body.nameForComment, body: req.body.texarForComment}, (err, doc) => {
+  models.Comm.find({name: req.body.nameForComment, body: req.body.texarForComment}, (err, doc) => {
     if(doc.length == 0){
       isComment = 'Thank you, your post added on system';
         getOrder();
     }else{
       isComment = 'Your post already exist in system. Sorry, you can not to add the same comment second time..';
       
-          CommPost.find({}).then(posts => {
+          models.Comm.find({}).then(posts => {
               res.render('contacts', { 
                 title: 'contacts',
                 posts: posts,

@@ -84,7 +84,6 @@ module.exports = () => {
         loginForm.style.display = 'inline';
       }
 
-      
         
     })
 
@@ -93,55 +92,38 @@ module.exports = () => {
   
     function actionForRegisterButt(){
       
-      let registerButt = document.querySelector('.register-button');
-      registerButt.addEventListener('click', function(e){
+      document.querySelector('.register-button').onclick = (e) => {
+          e.preventDefault();
+          let data = {
+              login: document.querySelector('#register-login').value,
+              password: document.querySelector('#register-password').value,
+              passwordConfirm: document.querySelector('#register-password-confirm').value
+            }
+        getActionForButt('register', data);
+      }
+  }
+
+    function actionForLoginButt(){
+      document.querySelector('.login-button').onclick = (e) => {
         e.preventDefault();
+        
         let data = {
-          login: document.querySelector('#register-login').value,
-          password: document.querySelector('#register-password').value,
-          passwordConfirm: document.querySelector('#register-password-confirm').value
+          login: document.querySelector('#login-login').value,
+          password: document.querySelector('#login-password').value,
         }
 
-        let req = new XMLHttpRequest();
-        req.open('POST', '/api/auth/register', true);
-        req.setRequestHeader('Content-Type', 'application/json');
-        req.addEventListener('load', () => {
-
-            let answ = JSON.parse(req.responseText);
-          if(!answ.ok){
-
-            document.querySelector('.register').insertAdjacentHTML('afterbegin', `<p class='border-danger bg-warning' id='errorParagraph'>${answ.error}</p>`)
-
-              if(answ.fields){
-                answ.fields.forEach(item => document.querySelector(`.register input[name=${item}]`).classList.add('border-danger'));
-              }
-            
-        clearFocus();
-            
-          }else{
-            document.querySelector('.register').insertAdjacentHTML('afterbegin', `<p class='border-success bg-success' id='errorParagraph'>Very Well!</p>`);
-          }
-
-        });
-        
-        req.send(JSON.stringify(data));
-
-      });
-
-
+        getActionForButt('login', data);
+     };
     }
 
 
-  function clearFocus(){
 
-    let inps = document.querySelectorAll('.register input');
-
+  function clearFocus(selectorClear){
+    let inps = document.querySelectorAll(selectorClear+' input');
     inps.forEach(current => {
-          current.addEventListener('focus', () => {
-
-          inps.forEach(item => item.classList.remove('border-danger'));
-
+          current.addEventListener('focus', () => { inps.forEach(item => item.classList.remove('border-danger'));
           let errParagraph = document.querySelector('#errorParagraph');
+
             if(errParagraph != null){
               errParagraph.parentNode.removeChild(errParagraph);
             }
@@ -149,12 +131,41 @@ module.exports = () => {
   });
   }
 
+
+
+  function getActionForButt(routingKey, obj){
+      let url = '/api/auth/' + routingKey;
+      let targetSelector = '.' + routingKey;
+
+        let req = new XMLHttpRequest();
+
+        req.open('POST', url, true);
+        req.setRequestHeader('Content-Type', 'application/json');
+        req.onload =  () => {
+            let answ = JSON.parse(req.response);
+            if(!answ.ok){
+              document.querySelector(targetSelector).insertAdjacentHTML('afterbegin', `<p class='border-danger bg-warning' id='errorParagraph'>${answ.error}</p>`);
+              if(answ.fields){
+              answ.fields.forEach(item => document.querySelector(`${targetSelector} input[name=${item}]`).classList.add('border-danger'));
+              }
+            clearFocus(targetSelector);
+            }else{
+              document.querySelector(targetSelector).insertAdjacentHTML('afterbegin', `<p class='border-success bg-success' id='errorParagraph'>Very Well!</p>`);
+            }
+        };
+        req.send(JSON.stringify(obj));
+  }
+  
+
+
+
     
 
   if(groupAuth){
     getAuthForms();
     startAction();
     actionForRegisterButt();
+    actionForLoginButt();
   }
 
 }
