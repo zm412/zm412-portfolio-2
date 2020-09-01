@@ -17,86 +17,26 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+//POSTS (api and pages)
 app.use('/api/auth', routes.auth);
+app.use('', routes.aboutPageForm);
+app.use('', routes.contactsPageCommentsForm);
 
-app.post('/about', (req, res) => {
-  if(!req.body) return res.sendStatus(400);
-  let addressIs;
-  
-  
-  models.Address.find({email: req.body.email}, (err, doc) => {
-    if(err) console.log(err);
-    if(doc.length == 0){
-      addressIs = 'Ваш адрес только что внесен в базу данных MongoDb для ежегодной новостной рассылки. Поздравляем!!!'; 
-      models.Address.create({email: req.body.email, check: req.body.check, moreInfo: req.body.moreInfo}, (err, doc) => {});
-    }else{
-      addressIs = "Ваш электронный адрес (" + req.body.email + ") уже есть в списке на ежегодную рассылку! Подписка произведена " + doc[0].date; 
-    }
-
-          res.render('about-success', {
-            title: 'about-success',
-            data: req.body,
-            addressIs: addressIs
-          });
-  })
-});
-
+//
+//
+//GETS
 app.get('/contacts', function (req, res){
   let isComment = '';
 
-  models.Comm.find({}).then(posts => {
+  models.Comm.find({}).lean().then(posts => {
     let name = req.url.slice(1);
       res.render(name, { 
         title: name,
         posts: posts,
         isComment: isComment
       });
-
-  })
+  });
 });
-
-app.post('/contacts', (req, res) => {
-  if(!req.body) return res.sendStatus(400);
-          
-                          async function getOrder(){
-                           try{ await models.Comm.create({
-                                    name: req.body.nameForComment,
-                                    body: req.body.texarForComment
-                                  });
-
-                          models.Comm.find({}).then(posts => {
-                              res.render('contacts', { 
-                                title: 'contacts',
-                                posts: posts,
-                                isComment: isComment
-                              });
-                          })
-
-                           } catch(e) {
-                             console.log(e)
-                           }
-                          }
-
-   let isComment;
-  
-  models.Comm.find({name: req.body.nameForComment, body: req.body.texarForComment}, (err, doc) => {
-    if(doc.length == 0){
-      isComment = 'Thank you, your post added on system';
-        getOrder();
-    }else{
-      isComment = 'Your post already exist in system. Sorry, you can not to add the same comment second time..';
-      
-          models.Comm.find({}).then(posts => {
-              res.render('contacts', { 
-                title: 'contacts',
-                posts: posts,
-                isComment: isComment
-              });
-            })
-    }   
-
-  });
-  });
 
 app.get(/\/|\/index/, function (req, res){
   let name = req.url.slice(1);
@@ -112,7 +52,6 @@ app.get('/favicon.ico', function (req, res){
 
 
 app.get('/about', function (req, res){
-
   let name = req.url.slice(1);
       res.render(name, { title: name} );
 });
@@ -129,15 +68,6 @@ app.get('/gallery', function (req, res){
       res.render(name, { title: name });
 });
 
-
-app.get('/test', function (req, res){
-  req.sendFile(__dirname + 'test.ejs')
-});
-
-
-app.get('/test/:id', function(req, res){
-  req.render('test')
-})
 app.use((req, res, next) => {
   const err = new Error('Not found');
   err.status = '404';

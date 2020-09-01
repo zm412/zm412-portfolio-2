@@ -19,26 +19,26 @@
             <button type="submit" class="btn btn-primary"  id='buttForComment'>Post comment</button>
           </div>
         </form>
+    <p> {{isComment}}</p><hr>
 
 
   </div>
 
     <div class='col-lg-4 col-md-6 col-sm-12' >
-    <p> {{isComment}}</p><hr>
   <ul>
-    <li>
 
 
       {{#each posts}}
+    <li>
 
             <h4>{{this.name}}</h4><br>
 
             <p> {{this.body}} </p>
 
-      {{/each}}
-
       <hr>
     </li>
+      {{/each}}
+
   </ul>
 
     </div>
