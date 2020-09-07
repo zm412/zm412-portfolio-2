@@ -1,10 +1,10 @@
 
 const auth = require('./auth');
-const aboutPageForm = require('./aboutPageForm');
+const getLetters = require('./getLetters');
 const contactsPageCommentsForm = require('./contactsPageCommentsForm');
 
 module.exports = {
   auth,
-  aboutPageForm ,
+  getLetters,
   contactsPageCommentsForm
 }
