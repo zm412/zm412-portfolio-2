@@ -18,6 +18,7 @@ router.post('/getlett', (req, res) => {
       addressIs = "Ваш электронный адрес (" + req.body.email + ") уже есть в списке на ежегодную рассылку! Подписка произведена " + doc[0].date; 
       answOk = false;
     }
+    console.log(req.body.moreInfo)
           res.json({
             data: req.body,
             addressIs: addressIs,
