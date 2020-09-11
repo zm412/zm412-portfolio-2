@@ -1,6 +1,7 @@
 const gallery = require('@js/gallery/gallery');
 const activeHeaderLinks = require('./js/activeHeader')
-const auth = require('@js/contacts/auth');
+const contacts = require('@js/contacts/blockComments');
+const home = require('@js/home/auth');
 const tasks = require('@js/tasks/tasks');
 const about = require('@js/about/about');
 const sendPicture = require('@img/sendPicture');
@@ -11,6 +12,7 @@ activeHeaderLinks();
 gallery();
 tasks();
 about();
-auth();
+home();
+contacts();
 sendPicture();
 

@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //POSTS (api and pages)
 app.use('/api/auth', routes.auth);
 app.use('/api/page_about', routes.getLetters);
-app.use('', routes.contactsPageCommentsForm);
+app.use('/api', routes.contactsPageCommentsForm);
 
 //
 //

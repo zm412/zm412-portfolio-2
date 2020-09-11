@@ -1,9 +1,9 @@
 
 const express = require('express');
-const models = require('../models');
+const models = require('../../models');
 const router = express.Router();
 
-router.post('/contacts', (req, res) => {
+router.post('/comments', (req, res) => {
 
   if(!req.body) return res.sendStatus(400);
          let isComment;
