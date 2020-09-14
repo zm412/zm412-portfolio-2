@@ -1,0 +1,12 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  height: $footerHeight;
+  border-top: 4px solid $myFrameColor;
+//  background-color: $myFrameColor;
+
+  .container {
+    height: 100%;
+    line-height: $footerHeight;
+  }
+}

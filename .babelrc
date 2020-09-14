@@ -1,0 +1,11 @@
+ 
+{
+  "presets": [
+  "@babel/preset-env",
+  "es2017",
+  "stage-3"
+  ],
+  "plugins": [ "syntax-dynamic-import" ]
+}
+
+
