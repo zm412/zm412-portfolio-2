@@ -1,12 +1,19 @@
 'use strict'
 
+
 module.exports = () =>{
+    let game = document.getElementById('gameX0');
+    let result = [];
+    if(game != null){
+      getGame(game);
+      startGame(result);
+    }
 
-let game = document.getElementById('gameX0');
+}
 
-  function getGame(){
+  function getGame(elem){
 
-    game.insertAdjacentHTML('afterbegin', `
+    elem.insertAdjacentHTML('afterbegin', `
         <style>
          #gameX0#tblGameX0{
           position: absolute; 
@@ -15,23 +22,18 @@ let game = document.getElementById('gameX0');
             width: 25%; 
             height: 25%; 
         }
-        
         .tdGameX0 {
           width: 30px;
           height: 25px;
         }
-       
         table {
           border: 1px solid black;
           border-collapse: collapse;
         }
-
         td, th{
           text-align: center;
           border: 1px solid black;
         }
-
-
             
             </style>
             <table id = 'tblGameX0' class="middle"></table>
@@ -48,8 +50,7 @@ let game = document.getElementById('gameX0');
   }
 
   
-function startGame(){
-
+function startGame(res){
   let tbl = document.getElementById('tblGameX0');
   createTbl(tbl);
   let who = document.getElementById('who');
@@ -61,7 +62,7 @@ function startGame(){
 	let clicks = 0;
 	who.innerHTML = '';
 	let gamer = 'X';
-	let nextG = (gamer) => (gamer == 'X') ? '0' : 'X';
+	let nextG = gamer => gamer == 'X' ? '0' : 'X';
 	addListener(tds, prepareCell);
 		
 		function prepareCell(){
@@ -87,13 +88,15 @@ function startGame(){
 
 
 		butt.addEventListener('click', function(){
-			result.push(who.innerHTML);	
+			res.push(who.innerHTML);	
       tbl.innerHTML = '';
-			startGame();
-        winX.innerHTML = result.reduce((sum, curr) => curr === 'X' ? ++sum  : sum, 0);
-				win0.innerHTML = result.reduce((sum, curr) => curr === '0' ? ++sum  : sum, 0);
-				noWins.innerHTML = result.reduce((sum, curr) => curr === 'Drow' ? ++sum  : sum, 0);
+			startGame(res);
+        winX.innerHTML = res.reduce((sum, curr) => curr === 'X' ? ++sum  : sum, 0);
+				win0.innerHTML = res.reduce((sum, curr) => curr === '0' ? ++sum  : sum, 0);
+				noWins.innerHTML = res.reduce((sum, curr) => curr === 'Drow' ? ++sum  : sum, 0);
 		});
+
+  }
 
 
                     function getWinner(elems){
@@ -140,15 +143,4 @@ function startGame(){
                           return el;
                       }		
 
-  }
 
-
-let result = [];
-
-  if(game != null){
-      getGame();
-      startGame();
-  }
-
-
-}
