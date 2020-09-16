@@ -1,8 +1,8 @@
 
 const karusel = require('./karusel');
-const counterPrice = require('./counterPrice');
+const countP = require('./counterPrice');
 
 module.exports = () => {
   karusel();
-  counterPrice();
+  countP();
 }

@@ -1,5 +1,5 @@
 
-module.exports = () => {
+let karusel = () => {
 
   let parentOfModule = document.querySelector('#group');
   
@@ -147,3 +147,4 @@ let arrTb = [
 
 }
 
+module.exports = karusel;

@@ -1,5 +1,6 @@
 
-module.exports = () => {
+
+let countP = () => {
   function countPrice(par){
   let parentOfModule = document.querySelector(par);
     if(parentOfModule == null) return new Error;
@@ -195,3 +196,5 @@ function getChecked(elems){
 countPrice('#countPrice')
 
 }
+
+module.exports = countP;
