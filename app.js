@@ -38,34 +38,20 @@ app.get('/contacts', function (req, res){
   });
 });
 
-app.get(/\/|\/index/, function (req, res){
+
+app.get(/\/*/, function (req, res){
+ let pages = ['index', 'about', 'tasks', 'gallery', 'contacts'] ;
   let name = req.url.slice(1);
   name == '' ? name = 'index' : name = name;
-      res.render(name, { title:'HOME',});
-});
-
-app.get('/favicon.ico', function (req, res){
-  res.status(404)
-  console.log('/favicon.ico')
-});
-
-
-
-app.get('/about', function (req, res){
-  let name = req.url.slice(1);
-      res.render(name, { title: name} );
-});
-
-
-app.get('/tasks', function (req, res){
-  let name = req.url.slice(1);
-      res.render(name, { title: name });
-});
-
-
-app.get('/gallery', function (req, res){
-  let name = req.url.slice(1);
-      res.render(name, { title: name });
+    if(pages.includes(name)){
+      res.render(name, {
+        title: name
+      });
+    }else{
+      res.render('404',{
+        title: 'error'
+      });
+  }
 });
 
 app.use((req, res, next) => {

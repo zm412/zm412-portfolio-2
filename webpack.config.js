@@ -29,7 +29,7 @@ module.exports = {
           options: {
             presets: ['@babel/preset-env']
           }
-        } 
+        }
       },
       {
         test: /\.(scss|css)$/,
@@ -41,7 +41,7 @@ module.exports = {
               reloadAll: true
             }
           },
-          
+
           'css-loader',
           'postcss-loader',
           'sass-loader'
@@ -66,4 +66,5 @@ module.exports = {
       filename: 'style.css'
     })
   ]
+
 }

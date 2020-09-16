@@ -2,7 +2,7 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-const schema = new Schema({
+const schemaAddr = new Schema({
   email: {
     type: String,
     //match: /^.+@.+\..+$/igm,
@@ -24,4 +24,4 @@ const schema = new Schema({
 
 
 
-module.exports = mongoose.model('Address', schema);
+module.exports = mongoose.model('Address', schemaAddr);

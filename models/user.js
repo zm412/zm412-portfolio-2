@@ -2,7 +2,7 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-const schema = new Schema({
+const schemaUser = new Schema({
   login: {
     type: String,
     require: true,
@@ -13,7 +13,7 @@ const schema = new Schema({
  } }, 
   { timestamps: true, });
 
-schema.set('toJSON', { virtuals: true });
+schemaUser.set('toJSON', { virtuals: true });
 
 
-module.exports = mongoose.model('User', schema);
+module.exports = mongoose.model('User', schemaUser);

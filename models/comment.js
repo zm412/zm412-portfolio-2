@@ -2,7 +2,7 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-const schema = new Schema({
+const schemaComm = new Schema({
   name: {
     type: String,
     require: true
@@ -16,4 +16,4 @@ const schema = new Schema({
 })
 
 
-module.exports = mongoose.model('Comment', schema);
+module.exports = mongoose.model('Comment', schemaComm);

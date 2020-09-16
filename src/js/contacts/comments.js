@@ -1,6 +1,6 @@
 
-const funcFetch = require('../myFetches');
-console.log(funcFetch)
+//const funcFetch = require('../myFetches');
+//console.log(funcFetch)
 
 module.exports = () => {
   let formComment = document.querySelector('#blockComments');
@@ -50,9 +50,9 @@ module.exports = () => {
 
       let url = '/api/conctacts/comments';
       async function postData(urlArg = '', dataArg = {}){
-
-     let response = await fetch(url) ;
-      let answ = await response.json();
+        let response = await fetch(url) ;
+        let answ = await response.json();
+        console.log(answ)
         return answ
       }
       postData(url, data)
