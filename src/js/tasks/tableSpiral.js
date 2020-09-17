@@ -2,11 +2,18 @@
 
 module.exports = () => {
 
-let blockSpiral = document.getElementById('blockSpiral');
-  
-function getHTML(){
+  let blockSpiral = document.getElementById('blockSpiral');
+  if(blockSpiral != null){
+    getHTMLOfBlockSpiral(blockSpiral);
+    startProcessBlockSpiral();
+  }
 
-    blockSpiral.insertAdjacentHTML('afterbegin', 
+}
+
+
+function getHTMLOfBlockSpiral(elem){
+
+    elem.insertAdjacentHTML('afterbegin', 
           `<input id='putCols' placeholder='put int number < 16' >
             <input type='submit' id='buttTableSpiral'>
                 <div id='elemTableSpiral'>
@@ -16,7 +23,7 @@ function getHTML(){
   }
 
 
-function startProcess(){
+function startProcessBlockSpiral(){
   let butt = document.getElementById('buttTableSpiral');
 
   butt.addEventListener('click', function(){
@@ -26,16 +33,18 @@ function startProcess(){
     if (inp.value > 15) return;
     
     tblSpiral.innerHTML = '';
-    let flat = getFlatArr(collectArrs(cols));
+    let flat = getFlatArr(collectArrsForBlockSpiral(cols));
     let arr = [0,...flat];
     createTblSpiral(tblSpiral, cols);
-    let inners = createInners(cols);
+    let inners = createInnersForBlockSpiral(cols);
     let tds1 = document.querySelectorAll('.spiralTd');
     putTogetherSpiral(tds1, arr, inners);
   });
   
+}
 
-        function collectArrs(rows){
+
+        function collectArrsForBlockSpiral(rows){
           let n = 0;
           let k = 0;
           let arr = getInnersForEachStep(rows);
@@ -68,7 +77,7 @@ function startProcess(){
           }
         }	
 
-        function createInners(rows){
+        function createInnersForBlockSpiral(rows){
           let tempArr = [];
           let el = rows ** 2;
           for(let i = 1; i <= el; i++){
@@ -137,13 +146,6 @@ function startProcess(){
             return temparr;
         }
 
-}
 
 
 
-  if(blockSpiral != null){
-    getHTML();
-    startProcess();
-  }
-
-}
