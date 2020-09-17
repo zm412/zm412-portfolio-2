@@ -35,26 +35,15 @@ function startActionTranspose(){
   let buttReset = document.getElementById('resetTableTranspose');
   let rows = document.getElementById('rowsTableTranspose');
   let cols = document.getElementById('columnsTableTranspose');
-  let rowsChangeble, colsChangeble, inners, newWay ;
+  let inners = [];
+  let newWay = [];
 
 		buttCreateTable.addEventListener('click', function(){
-       rowsChangeble = Number(rows.value);
-       colsChangeble = Number(cols.value);
-
-          if(rowsChangeble > 15 || colsChangeble > 15){
-            pErr.innerHTML = 'Error!: rows and columns have to be <=  15';
-            return;
-          }else{
-            pErr.innerHTML = '';
-          }
+      let obj =  actionForButtCreateTbl(Number(rows.value), Number(cols.value),pErr, tbl, buttCreateTable);
+      inners = obj.inners;
+      newWay = obj.newWay;
       
-      inners = createStartArr(rowsChangeble, colsChangeble);
-      newWay = createNewWay(Number(rows.value), Number(cols.value));
-      createTbl(rowsChangeble, colsChangeble, tbl);
-      putTogether(inners);
-      buttCreateTable.disabled = true;
-      tbl.className = 'standartWay';
-    });
+   });
 
 		buttFlipTable.addEventListener('click', function(){
       rows.disabled = true;
@@ -64,29 +53,51 @@ function startActionTranspose(){
 		});
 
     buttReset.addEventListener('click', function(){
-      rows.disabled = false;
-      cols.disabled = false;
-      rows.value = '';
-      cols.value = ''
-      tbl.innerHTML = '';
-      buttCreateTable.disabled = false;
+     actionForButtReset(rows, cols, tbl,buttCreateTable)  ;
     });
 }
 
-function changeWay(elemTbl, inpRowsElem, inpColsElem, innersVar, newWayVar){
+function actionForButtCreateTbl(rowsNum, colsNum, errElem, tblElem, thisButtElem){
+          if(rowsNum > 15 || colsNum > 15){
+            errElem.innerHTML = 'Error!: rows and columns have to be <=  15';
+            return;
+          }else{
+            errElem.innerHTML = '';
+          }
+      
+      let inners = createStartArr(rowsNum, colsNum);
+      let newWay = createNewWay(rowsNum, colsNum);
+      createTbl(rowsNum, colsNum, tblElem);
+      putTogether(inners);
+      thisButtElem.disabled = true;
+      tblElem.className = 'standartWay';
+  return {inners: inners,
+  newWay: newWay}
+}
+
+function actionForButtReset(rowsEl, colsEl, tblEl, buttEl){
+    rowsEl.disabled = false;
+      colsEl.disabled = false;
+      rowsEl.value = '';
+      colsEl.value = ''
+      tblEl.innerHTML = '';
+      buttEl.disabled = false;
+}
+
+function changeWay(elemTbl, inpRowsElem, inpColsElem, innersVarArg, newWayVarArg){
   if(elemTbl.className == 'standartWay'){
     elemTbl.className = 'diffWay';
     let tempRows = Number(inpColsElem.value); 
     let tempCols = Number(inpRowsElem.value);
       createTbl(tempRows, tempCols, elemTbl);
-    putTogether(innersVar, newWayVar);
+    putTogether(innersVarArg, newWayVarArg);
 
   }else{
     elemTbl.className = 'standartWay';
     let tempRows = Number(inpRowsElem.value);
     let tempCols = Number(inpColsElem.value);
       createTbl(tempRows, tempCols, elemTbl);
-    putTogether(innersVar);
+    putTogether(innersVarArg);
   }
 }
 
