@@ -31,11 +31,12 @@ function getHigthFromTop(collectorVar){
 	let inp = document.getElementById('inpCalc');			
 	let p = document.getElementById('infoCalc');			
 	let tbl = document.getElementById('tblCalc');
+  let tdsCalc = document.querySelectorAll('.tdCalc');				
 
 	let symbols = [7,8,9,'/',4,5,6,'*', 1,2,3,'-', 0, '.', '=', '+', 'Restart', 'BS', 'Insert',''];			
 		
 	getTbl(tbl, symbols);
-	getTargetClick('td', inp, p, collectorVar);
+	getTargetClick(inp, p, collectorVar);
 }
 
 
@@ -55,7 +56,6 @@ function createEl(tag, par){
 
 
 function getTbl(elem, arr){				
-  console.log('hi')
   let k = 0;			
     for(let i = 1; i <= 5; i++){		
       let tr = createEl('tr', elem);	
@@ -68,31 +68,38 @@ function getTbl(elem, arr){
     }				
 }						
 
-function getTargetClick(tag, elInp, elP, collectorVar){						
-  let elems = document.querySelectorAll('.tdCalc');				
-  for(let i = 0;  i < elems.length; i++){				
-    elems[i].addEventListener('click', function getExc(){		
-      let inInp = this.innerHTML;
-    if(inInp >= 0 || inInp == '.'){	
-      elInp.value += inInp;		
-      elP.innerHTML += inInp;
-    }else if(inInp == '/' || inInp == '*' || inInp == '+' || inInp == '-'){
-      elInp.value += inInp;		
-      elP.innerHTML += inInp;
-      elInp.value = '';
-    }else if(inInp == '='){	
-      collectorVar = eval(elP.innerHTML);
-      elInp.value = eval(elP.innerHTML);
-      elP.innerHTML += ' = ' + elInp.value;
-    }else if(inInp == 'BS'){
-      afterBS(elInp, elP); 
-    }else if(inInp == 'Insert'){
-      elInp.value += collectorVar;
-    }else if(inInp == 'Restart'){
-      elP.innerHTML = '';
-      elInp.value = '';
-    }; }); }	
-}			
+function getTargetClick(elInp, elP, collectorVar){						
+  let allSymbols = [
+    { expr: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'],
+      func: (exp) => { elInp.value += exp;		
+                       elP.innerHTML += exp; } },
+    { expr: ['/', '*', '+', '-'],
+      func: (exp) => { elInp.value += exp;		
+                        elP.innerHTML += exp;
+                        elInp.value = ''; } },
+    { expr: ['='],
+      func: (exp) => { collectorVar = eval(elP.innerHTML);
+                        elInp.value = eval(elP.innerHTML);
+                        elP.innerHTML += ' = ' + elInp.value; } },
+    { expr: ['BS'],
+      func: (exp) => { afterBS(elInp, elP); } },
+    { expr: ['Insert'],
+      func: (exp) => { elInp.value += collectorVar; } },
+    { expr: ['Restart'],
+      func: (exp) => { elP.innerHTML = ''; elInp.value = ''; } } ];
+
+   let elems = document.querySelectorAll('.tdCalc');
+    for(let arr of allSymbols){
+     for(let i = 0;  i < elems.length; i++){
+        elems[i].addEventListener('click', function (){
+        let inInp = elems[i].innerHTML;
+            if(arr.expr.includes(inInp)) arr.func(inInp);
+        });
+      } } } 
+
+
+
+
 
 function afterBS(elInp, elP){
     let tempa = elInp.value.split('');
