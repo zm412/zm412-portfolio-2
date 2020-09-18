@@ -31,40 +31,28 @@ function collectActionForCounterPrice(){
 }
 
 function countPrice(parentSelector){
-  let parentOfModule = document.querySelector(parentSelector);
-  console.log(parentOfModule)
-    if(parentOfModule == null) return new Error;
-    parentOfModule.insertAdjacentHTML('afterbegin', `
-           <div id = 'rightBl'>
-            <form id = 'form'>
-              <fieldset>
-                <legend>Калькулятор услуг</legend>
+    document.querySelector(parentSelector).insertAdjacentHTML('afterbegin', `
+           <div id='rightBl'>
+            <form id='form'>
+                <h3>Калькулятор услуг</h3>
                 <div id='size'>Вместимость</div>
-                  <div class="range">
-            <input type="range" id="priceR" min="0" max="50" step="1" >
+                  <div class="range"> <input type="range" id="priceR" min="0" max="50" step="1" >
             <input id="showRange" type="text" ><br>
-            <span id = 'plusPersent'>Плюс <i id = 'numPers'></i> % к стоимости аренды бани: </span>
-                  </div>
-          <div id = 'radioSet'></div>
-          <div id = 'oil'>
-              <p> <input type = 'checkbox' id = 'massOil' value = 'oil' data-price='150'>Aroma-therapy </p>
-          </div>
+            <span id='plusPersent'>Плюс <i id='numPers'></i> % к стоимости аренды бани: </span> </div>
+          <div id='radioSet'></div>
+          <div id='oil'> <p> <input type='checkbox' id='massOil' value='oil' data-price='150'>Aroma-therapy </p> </div>
               <div id='size'>Ароматические добавки для пара:</div>
-              <p>
-              <select id = 'aroma'>
-                <option value = '0' data-price = '0'>---</option>
-                <option value = '1' data-price = '200'>orage (200 ед.)</option>
-                <option value = '2' data-price = '210'>amla (210 ед.)</option>
-                <option value = '3' data-price = '220'>mint (220 ед.)</option>
-                <option value = '4' data-price = '230'>tea tree (230 ед.)</option>
-                <option value = '5' data-price = '240'>flowers (240 ед.)</option>
-              </select>
-              </p>
-    </fieldset>
+              <p> <select id='aroma'>
+                <option value='0' data-price='0'>---</option>
+                <option value='1' data-price='200'>orage (200 ед.)</option>
+                <option value='2' data-price='210'>amla (210 ед.)</option>
+                <option value='3' data-price='220'>mint (220 ед.)</option>
+                <option value='4' data-price='230'>tea tree (230 ед.)</option>
+                <option value='5' data-price='240'>flowers (240 ед.)</option>
+              </select> </p>
             </form>
           </div>
-  `);
-}
+  `); }
 
 
 function startActionCounterPrice(objPriceBig){

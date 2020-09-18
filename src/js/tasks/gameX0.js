@@ -9,8 +9,7 @@ module.exports = () =>{
 
 function getGame(parentSelector){
   let parentOfModule = document.querySelector(parentSelector);
-  console.log(parentOfModule)
-    if(parentOfModule == null) return new Error();
+    //if(parentOfModule == null) return new Error();
   parentOfModule.insertAdjacentHTML('afterbegin', `
   <table id = 'tblGameX0' class="middle"></table>
     </div>
