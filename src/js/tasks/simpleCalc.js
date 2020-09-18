@@ -1,20 +1,19 @@
 'use strict'
 
 module.exports = () => {
-
-let simpleCalc = document.getElementById('simpleCalc');
-let collector;
-if(simpleCalc != null){
+  let simpleCalc = document.getElementById('simpleCalc');
 	let collector = '';
-  getCalc(simpleCalc);
+  getCalc('#simpleCalc');
   getHigthFromTop(collector);
 }
-}
 
 
 
-function getCalc(elem){
-  elem.insertAdjacentHTML('afterbegin', `
+function getCalc(parentSelector){
+
+  let parentOfModule = document.querySelector(parentSelector);
+    if(parentOfModule == null) return new Error;
+  parentOfModule.insertAdjacentHTML('afterbegin', `
     <table id = 'tblCalc'>
       <tr>
         <th>C</th>

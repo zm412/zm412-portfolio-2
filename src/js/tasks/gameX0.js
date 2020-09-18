@@ -2,17 +2,16 @@
 
 
 module.exports = () =>{
-    let game = document.getElementById('gameX0');
     let result = [];
-    if(game != null){
-      getGame(game);
+      getGame('#gameX0');
       startGame(result);
-    }
-
 }
 
-function getGame(elem){
-  elem.insertAdjacentHTML('afterbegin', `
+function getGame(parentSelector){
+  let parentOfModule = document.querySelector(parentSelector);
+  console.log(parentOfModule)
+    if(parentOfModule == null) return new Error();
+  parentOfModule.insertAdjacentHTML('afterbegin', `
   <table id = 'tblGameX0' class="middle"></table>
     </div>
     <div>	<p> Winner in this Game: <span id = 'who'></span></p>

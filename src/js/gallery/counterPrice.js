@@ -1,32 +1,54 @@
 
 
-let countP = () => {
-  function countPrice(par){
-  let parentOfModule = document.querySelector(par);
+module.exports = () => {
+  countPrice('#countPrice')
+  collectActionForCounterPrice(); 
+};
+
+function collectActionForCounterPrice(){
+  let priceForBigRoom = {
+      '0' : [0, 11],
+      '10': [10, 21],
+      '20': [20, 31],
+      '28': [30, 41],
+      '35': [40, 51]
+  };
+
+  let saunaTypesAndPrices = {
+      rus : ['Русская баня', 100],
+      fin : ['Финская баня', 150],
+      jap : ['Японская баня', 200],
+      infr : ['Инфракрасная сауна', 250],
+      scan: ['Скандинавская баня', 300],
+      rom : ['Римская сауна', 350],
+      turk : ['Турецкая сауна', 400],
+  };
+
+  let radioSet = document.getElementById('radioSet');
+  generateRadioSet(radioSet, saunaTypesAndPrices);
+
+  startActionCounterPrice(priceForBigRoom);
+}
+
+function countPrice(parentSelector){
+  let parentOfModule = document.querySelector(parentSelector);
+  console.log(parentOfModule)
     if(parentOfModule == null) return new Error;
-
     parentOfModule.insertAdjacentHTML('afterbegin', `
-
            <div id = 'rightBl'>
             <form id = 'form'>
               <fieldset>
                 <legend>Калькулятор услуг</legend>
-                      
                 <div id='size'>Вместимость</div>
                   <div class="range">
             <input type="range" id="priceR" min="0" max="50" step="1" >
             <input id="showRange" type="text" ><br>
             <span id = 'plusPersent'>Плюс <i id = 'numPers'></i> % к стоимости аренды бани: </span>
                   </div>
-
           <div id = 'radioSet'></div>
-
           <div id = 'oil'>
-              <p>
-          <input type = 'checkbox' id = 'massOil' value = 'oil' data-price='150'>Aroma-therapy
-              </p>
+              <p> <input type = 'checkbox' id = 'massOil' value = 'oil' data-price='150'>Aroma-therapy </p>
           </div>
-
               <div id='size'>Ароматические добавки для пара:</div>
               <p>
               <select id = 'aroma'>
@@ -37,63 +59,33 @@ let countP = () => {
                 <option value = '4' data-price = '230'>tea tree (230 ед.)</option>
                 <option value = '5' data-price = '240'>flowers (240 ед.)</option>
               </select>
-                  </p>
+              </p>
     </fieldset>
             </form>
           </div>
   `);
-  
+}
 
 
-
-let priceForBigRoom = {
-		'0' : [0, 11],
-		'10': [10, 21],
-		'20': [20, 31],
-	   	'28': [30, 41],
-	   	'35': [40, 51]
-};
-
-let saunaTypesAndPrices = {
-    rus : ['Русская баня', 100],
-    fin : ['Финская баня', 150],
-    jap : ['Японская баня', 200],
-    infr : ['Инфракрасная сауна', 250],
-    scan: ['Скандинавская баня', 300],
-    rom : ['Римская сауна', 350],
-    turk : ['Турецкая сауна', 400],
-};
-	
-
-
-let radioSet = document.getElementById('radioSet');
-generateRadioSet(radioSet, saunaTypesAndPrices);
-let radio = document.querySelectorAll('.typeSauna');
-
-startAction();
-
-function startAction(){
+function startActionCounterPrice(objPriceBig){
 	let priceR = document.getElementById('priceR');
 	let showRange = document.getElementById('showRange');
 	let form = document.getElementById('form');
 	let p = document.getElementById('cost');
 	let i = document.getElementById('numPers');
 	let therapy = document.getElementById('massOil');
+  let radio = document.querySelectorAll('.typeSauna');
     let options = document.getElementById('aroma').options;
     getChecked(radio);
 
-
     showRange.value = priceR.value;
-    getPersent(priceForBigRoom, i, priceR.value);
+    getPersent(objPriceBig, i, priceR.value);
 
-    showRange.onchange = () => (priceR.value = showRange.value, getPersent(priceForBigRoom, i, showRange.value));
+    showRange.onchange = () => (priceR.value = showRange.value, getPersent(objPriceBig, i, showRange.value));
     
-    priceR.oninput = () => (showRange.value = priceR.value, getPersent(priceForBigRoom, i, showRange.value));
-
-
-	
+    priceR.oninput = () => (showRange.value = priceR.value, getPersent(objPriceBig, i, showRange.value));
 	form.addEventListener('change', function(){
-		let rangePlus = priceOfRange(showRange.value, radio, priceForBigRoom);
+		let rangePlus = priceOfRange(showRange.value, radio, objPriceBig);
         p.innerHTML = '';
         getFullPrice(rangePlus, p, options, radio, therapy);
         	});
@@ -166,7 +158,6 @@ function priceOfRange(valueRange, elemsOfRadio, obj){
                 persentNum: key,
                 };
             }
-
 	}
 }
 
@@ -191,10 +182,3 @@ function getChecked(elems){
 }
 
 
-};
-
-countPrice('#countPrice')
-
-}
-
-module.exports = countP;

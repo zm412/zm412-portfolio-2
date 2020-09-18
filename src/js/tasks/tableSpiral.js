@@ -2,18 +2,16 @@
 
 module.exports = () => {
 
-  let blockSpiral = document.getElementById('blockSpiral');
-  if(blockSpiral != null){
-    getHTMLOfBlockSpiral(blockSpiral);
+    getHTMLOfBlockSpiral('#blockSpiral');
     startProcessBlockSpiral();
-  }
-
 }
 
 
-function getHTMLOfBlockSpiral(elem){
+function getHTMLOfBlockSpiral(parentSelector){
+  let parentOfModule = document.querySelector(parentSelector);
+    if(parentOfModule == null) return new Error;
 
-    elem.insertAdjacentHTML('afterbegin', 
+    parentOfModule.insertAdjacentHTML('afterbegin', 
           `<input id='putCols' placeholder='put int number < 16' >
             <input type='submit' id='buttTableSpiral'>
                 <div id='elemTableSpiral'>

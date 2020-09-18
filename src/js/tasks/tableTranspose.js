@@ -1,18 +1,16 @@
 'use strict'
 
 module.exports = () => {
-
-  let transpose = document.getElementById('transpose');
-  if(transpose != null){
-      getTableTranspose(transpose);
+      getTableTranspose('#transpose');
       startActionTranspose();
-  }
 }
 
 
 
-  function getTableTranspose(elem){
-      elem.insertAdjacentHTML('afterbegin', `
+function getTableTranspose(parentSelector){
+  let parentOfModule = document.querySelector(parentSelector);
+    if(parentOfModule == null) return new Error;
+      parentOfModule.insertAdjacentHTML('afterbegin', `
         <input id = 'rowsTableTranspose' placeholder = 'int <= 15'><br>
         <input id = 'columnsTableTranspose' placeholder = 'int <= 15'><br>
         <div id = 'elemTableTranspose'>

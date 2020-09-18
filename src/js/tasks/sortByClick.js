@@ -1,20 +1,16 @@
 'use strict'
 
 module.exports = () => {
-
-let blockSortBy = document.getElementById('sortByClick');
-
-if(blockSortBy != null){
-      getTableSortByClick(blockSortBy);
+      getTableSortByClick('#sortByClick');
       startSortByClick();
 }
 
-}
 
 
-
-  function getTableSortByClick(elem){
-elem.insertAdjacentHTML('afterbegin', `
+  function getTableSortByClick(parentSelector){
+  let parentOfModule = document.querySelector(parentSelector);
+    if(parentOfModule == null) return new Error;
+parentOfModule.insertAdjacentHTML('afterbegin', `
   		<table id='tblSortByClick' class='middle table table-bordered'>
 		<tr class='trSort'><th class='thSort'>SortByName</th><th class='thSort'>SortByDate</th><th class='thSort'>BackSort</th><th class='thSort'>SortNumbers</th></tr>
 		<tr class='trSort'><td class='tdSort'>Mila</td><td class='tdSort'>10/18/2002</td><td class='tdSort'>mango</td><td class='tdSort'>23</td></tr>
