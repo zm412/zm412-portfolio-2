@@ -9,7 +9,6 @@ module.exports = () => {
 
 function getZapretSosedyam(parentSelector){
   let parentOfModule = document.querySelector(parentSelector);
-  if(parentOfModule == null) return new Error;
     parentOfModule.insertAdjacentHTML('afterbegin', `
       <table id = 'tblZapretSosedyam'  class = 'middle table table-bordered'>
       <tr class = 'trZapret'><th class = 'thZapret'>Name</th><th class = 'thZapret'>date</th><th class = 'thZapret'>Plants</th><th class = 'thZapret'>num</th><th class = 'thZapret'>num</th></tr>

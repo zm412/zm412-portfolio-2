@@ -8,11 +8,8 @@ let arrTb = [
         ['./images/rusSauna1.jpg','./images/rusSauna2.jpg', './images/rusSauna3.jpg'],['./images/rimSauna1.jpg','./images/rimSauna2.jpg', './images/rimSauna3.jpg'], ['./images/finnSauna1.jpg','./images/finnSauna2.jpg', './images/finnSauna3.jpg'], ['./images/japanSauna1.jpg','./images/japanSauna2.jpg', './images/japanSauna3.jpg'],['./images/infraSauna1.jpg','./images/infraSauna2.jpg', './images/infraSauna3.jpg'], ['./images/scandinavianSauna1.jpg','./images/scandinavianSauna2.jpg', './images/scandinavianSauna3.jpg'],['./images/turkishSauna1.jpg','./images/turkishSauna2.jpg', './images/turkishSauna3.jpg']
               ]; 
 
-  if(parentOfModule != null){
       getGallery(parentOfModule, arr, arrTb);
       startActionForKarusel(arr, arrTb);
-  }
-
 }
 
 

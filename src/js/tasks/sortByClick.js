@@ -9,7 +9,6 @@ module.exports = () => {
 
   function getTableSortByClick(parentSelector){
   let parentOfModule = document.querySelector(parentSelector);
-    if(parentOfModule == null) return new Error;
 parentOfModule.insertAdjacentHTML('afterbegin', `
   		<table id='tblSortByClick' class='middle table table-bordered'>
 		<tr class='trSort'><th class='thSort'>SortByName</th><th class='thSort'>SortByDate</th><th class='thSort'>BackSort</th><th class='thSort'>SortNumbers</th></tr>

@@ -9,7 +9,6 @@ module.exports = () => {
 
 function getHTMLOfBlockSpiral(parentSelector){
   let parentOfModule = document.querySelector(parentSelector);
-    if(parentOfModule == null) return new Error;
 
     parentOfModule.insertAdjacentHTML('afterbegin', 
           `<input id='putCols' placeholder='put int number < 16' >

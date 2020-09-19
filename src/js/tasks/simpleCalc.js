@@ -12,7 +12,6 @@ module.exports = () => {
 function getCalc(parentSelector){
 
   let parentOfModule = document.querySelector(parentSelector);
-    if(parentOfModule == null) return new Error;
   parentOfModule.insertAdjacentHTML('afterbegin', `
     <table id = 'tblCalc'>
       <tr>
