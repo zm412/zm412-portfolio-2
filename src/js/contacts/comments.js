@@ -4,30 +4,28 @@
 
 module.exports = () => {
   let formComment = document.querySelector('#blockComments');
-  
-  function getFormForComm(){
-    formComment.insertAdjacentHTML('afterbegin', `
-      
+    getFormForComm(formComment);
+  console.log('lkjlj');
+}
+
+
+  function getFormForComm(elem){
+    elem.insertAdjacentHTML('afterbegin', `
               <form method='post' action='contacts' class="formSpam">
           <div class="form-group">
             <label for="exampleFormControlInput1">Name/Username</label>
             <input type="text" class="form-control" placeholder="name/username" id='inpNameForComm' name='nameForComment'>
           </div>
-          
           <div class="form-group">
             <label for="texarForComm"> Textarea</label>
             <textarea class="form-control"  rows="5" id='texarForComm' name='texarForComment'></textarea>
              <div class=""> Please enter a message in the textarea.  </div>
           </div>
-
-         
           <div class="form-group">
             <button type="submit" class="btn btn-primary"  id='buttForComment'>Post comment</button>
           </div>
         </form>
-
       `);
-
     startAction();
   }
 
@@ -57,11 +55,5 @@ module.exports = () => {
       }
       postData(url, data)
     });
-
   }
   
-  if(formComment != null){
-    getFormForComm();
-  }
-
-}
