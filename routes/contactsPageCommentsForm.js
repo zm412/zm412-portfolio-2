@@ -17,36 +17,32 @@ router.post('/comments', (req, res) => {
                                     name: req.body.nameForComment,
                                     body: req.body.texarForComment
                                   });
-
-                          models.Comm.find({}).lean().then(posts => {
-                              res.render('contacts', { 
-                                title: 'contacts',
-                                posts: posts,
-                                isComment: isComment
-                              });
-                          })
+                              sendComments(posts, isComment);
 
                            } catch(e) {
                              console.log(e)
-                           }
+                             }
                           }
             )();
 
     }else{
       isComment = 'Your post already exist in system. Sorry, you can not to add the same comment second time..';
-      
+      sendComments(posts, isComment);
+   }   
+
+  });
+  });
+
+function sendComments(arr, textMessage){
+    
           models.Comm.find({}).lean().then(posts => {
               res.render('contacts', { 
                 title: 'contacts',
-                posts: posts,
-                isComment: isComment
+                posts: arr,
+                isComment:textMessage 
               });
             })
-    }   
-
-  });
-  });
-
-
+   
+}
 
 module.exports = router;
