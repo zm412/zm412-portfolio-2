@@ -1,12 +1,13 @@
 const path = require('path');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+require('babel-polyfill');
 
 module.exports = {
   mode: 'development',
   devtool: 'source-map',
   context: path.resolve(__dirname, 'src'),
-  entry: [ './main.js', './main.scss'],
+  entry: [ 'babel-polyfill', './main.js', './main.scss'],
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
