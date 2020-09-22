@@ -1,11 +1,10 @@
 
 //const funcFetch = require('../myFetches');
-//console.log(funcFetch)
+//console.log(myFetches)
 
 module.exports = () => {
   let formComment = document.querySelector('#blockComments');
     getFormForComm(formComment);
-  console.log('lkjlj');
 }
 
 
@@ -41,19 +40,21 @@ module.exports = () => {
         texarForComment: text.value
       }
       //console.log(data)
-    // funcFetch('/api/contacts/comments', data )
-    //    .then(docs => {
-    //      console.log(docs);
-    //    })
-
-      let url = '/api/conctacts/comments';
-      async function postData(urlArg = '', dataArg = {}){
-        let response = await fetch(url) ;
-        let answ = await response.json();
-        console.log(answ)
-        return answ
-      }
-      postData(url, data)
+     fetch('/api/contacts/comments', {
+    method: 'POST',
+    mode: 'same-origin',
+    cache: 'no-cache', 
+    credentials: 'same-origin', 
+    headers: { 'Content-Type': 'application/json' },
+    redirect: 'follow', 
+    referrerPolicy: 'no-referrer', 
+    body: JSON.stringify(data) 
+})
+        .then(response => {
+          console.log(response.text());
+//          response.text();
+        });
+    
     });
   }
-  
+ 

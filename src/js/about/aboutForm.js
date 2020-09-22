@@ -14,7 +14,7 @@ module.exports = () => {
   function getAbout(elem){
     elem.insertAdjacentHTML('afterbegin', `
       <h3>Подпишитесь на ежегодную рассылку!</h3>
-        <form method='post' action='./about-success.hbs'>
+        <form method='post' action=''>
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
               <input type="email" class="form-control" name='email' id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">

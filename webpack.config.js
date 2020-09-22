@@ -59,9 +59,9 @@ module.exports = {
    ]
   },
   plugins:[
-    new MinifyPlugin({}, {
-      comments: false
-    }),
+//    new MinifyPlugin({}, {
+//      comments: false
+//    }),
 
     new MiniCssExtractPlugin({
       filename: 'style.css'
