@@ -1,19 +1,31 @@
+
 const path = require('path');
 const webpack = require('webpack')
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 require('babel-polyfill');
+require('@babel/polyfill');
+const autoprefixer = require('autoprefixer');
+
+
 
 module.exports = {
-  mode: 'development',
-  devtool: 'source-map',
-  context: path.resolve(__dirname, 'src'),
-  entry: ['bootstrap/dist/css/bootstrap.min.css', 'babel-polyfill', './main.js', './main.scss'],
+  devtool: false,
+  entry: {
+    main: [
+      '@/main.js', 
+      '@/main.scss',
+      '@babel/polyfill',
+      'bootstrap/dist/css/bootstrap.min.css',
+    ],
+    bundle: ['jquery', 'popper.js', 'bootstrap'],
+  },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: '[name].js',
   },
+
   resolve: {
     alias: {
       '@mod': path.resolve(__dirname, 'node_modules'),
@@ -23,69 +35,76 @@ module.exports = {
       '@scss': path.resolve(__dirname, 'src/scss'),
     }
   },
-  module:{
-    rules:[
+
+  module: {
+    rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(jsx?)$/,
         exclude: /node_modules/,
-        loader:{
-          loader:'babel-loader',
+        use: [{
+          loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+            presets: ['@babel/preset-env', '@babel/react'],
+            cacheDirectory: true,
+            plugins: ['react-hot-loader/babel'],
+          },
+        }],
       },
-        {
+      {
         test: /\.(sa|sc|c)ss$/,
-        exclude: /node_modules/,
         use: [
           { loader: 'style-loader', },
           { loader: MiniCssExtractPlugin.loader ,
-            options: {
-              reloadAll: true
-            } },
+            options: { reloadAll: true } },
 
           { loader: 'css-loader',
             options: { sourceMap: true }, },
-
           { loader: 'postcss-loader',
             options: {
               sourceMap: true,
-              plugins: [
-                autoprefixer, ], }, },
-
+              plugins: [ autoprefixer, ],
+            }, },
           { loader: 'sass-loader',
             options: { sourceMap: true }, },
-        ]
+        ],
       },
-      {
-        test: /\.(png|jpe?g|svg|ttf|eot|woff|woff2)$/,
+      { test: /\.(png|jpe?g|svg|ttf|eot|woff|woff2)$/,
         use: [
           { loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
-              outputPath: 'img' }, },
-          'img-loader', ], },
-   ]
+              name: '[name].[ext]', },
+          },
+          'img-loader',
+        ],
+      },
+    ],
   },
-  plugins:[
-//    new MinifyPlugin({}, {
-//      comments: false
-//    }),
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        devServer: true,
+      },
+    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],
     }),
-    new CopyWebpackPlugin([
-      { from: 'src/img', to: 'img' },
-    ]),
+//    new CopyWebpackPlugin(
+//      { from: 'src/img', to: 'img' }
+//    ),
+//    new webpack.SourceMapDevToolPlugin({
+//      filename: '[name].js.map',
+//      exclude: ['bundle.js'],
+//    }),
     new MiniCssExtractPlugin({
       filename: 'style.css'
     }),
-      new webpack.HotModuleReplacementPlugin(),
-
-  ]
-
-}
+    //new webpack.HotModuleReplacementPlugin(),
+//    new HtmlWebpackPlugin({
+//      filename: './index.html',
+//      template: './views/layouts/layout.hbs',
+// }),
+  ],
+};
