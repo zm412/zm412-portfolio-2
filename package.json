@@ -4,7 +4,7 @@
   "description": "portfolio-zm412",
   "private": true,
   "scripts": {
-    "build": "webpack -w --config webpack.config.dev.babel.js --open",
+    "build": "webpack -w",
     "test": "jest",
     "start": "nodemon index.js --mode development",
     "newsite:dev": "concurrently 'npm:build' 'npm:start'"
