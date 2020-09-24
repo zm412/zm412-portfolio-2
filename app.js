@@ -40,7 +40,7 @@ app.get('/contacts', function (req, res){
 
 
 app.get(/\/*/, function (req, res){
- let pages = ['index', 'about', 'tasks', 'gallery', 'contacts'] ;
+ let pages = ['index', 'about', 'tasks', 'gallery', 'contacts', 'test'] ;
   let name = req.url.slice(1);
   name == '' ? name = 'index' : name = name;
     if(pages.includes(name)){

@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-require('babel-polyfill');
+//require('babel-polyfill');
 require('@babel/polyfill');
 const autoprefixer = require('autoprefixer');
 
@@ -33,6 +33,7 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
       '@img': path.resolve(__dirname, 'src/img'),
       '@js': path.resolve(__dirname, 'src/js'),
+      '@components': path.resolve(__dirname, 'src/components'),
       '@scss': path.resolve(__dirname, 'src/scss'),
     }
   },
