@@ -1,4 +1,4 @@
-const Test = require('./test.jsx');
+const Test = require('./components/test');
 const React = require('react');
 const ReactDOM = require('react-dom');
 

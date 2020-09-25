@@ -5,7 +5,7 @@ const tasks = require('@js/tasks/tasks');
 const about = require('@js/about/about');
 const contacts = require('@js/contacts/contacts');
 const sendPicture = require('@img/sendPicture');
-const components = require('./components/reactives');
+const components = require('./Reactives');
 
 import '@/main.scss';
 let pagesDep= {

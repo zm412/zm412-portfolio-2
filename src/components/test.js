@@ -37,5 +37,5 @@ class Test extends React.Component{
 
 }
 
-console.log(Test)
+//console.log(Test)
 module.exports = Test;

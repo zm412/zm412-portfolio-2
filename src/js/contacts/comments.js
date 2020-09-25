@@ -1,10 +1,14 @@
 
-//const funcFetch = require('../myFetches');
-//console.log(myFetches)
+const News = require('../../components/Contacts');
+
+const React = require('react');
+const ReactDOM = require('react-dom');
+let posts = [{name : 'lkjlj', body: '1111'}];
 
 module.exports = () => {
   let formComment = document.querySelector('#blockComments');
     getFormForComm(formComment);
+    ReactDOM.render(<News data={posts} />, document.getElementById('blockListComments'));
 }
 
 
@@ -50,11 +54,13 @@ module.exports = () => {
     referrerPolicy: 'no-referrer', 
     body: JSON.stringify(data) 
 })
-        .then(response => {
-          console.log(response.text());
-//          response.text();
-        });
-    
+        .then(response => response.json())
+  .then(result => {
+        posts = result.posts;
+        console.log(posts)
+    ReactDOM.render(<News data={result.posts} />, document.getElementById('blockListComments'));
+  })
     });
+
   }
  
