@@ -6,6 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 //require('babel-polyfill');
 require('@babel/polyfill');
+require("babel-core/register");
 const autoprefixer = require('autoprefixer');
 
 
@@ -14,9 +15,9 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: {
     main: [
+      '@babel/polyfill',
       '@/main.js', 
       '@/main.scss',
-      '@babel/polyfill',
       'bootstrap/dist/css/bootstrap.min.css',
     ],
     bundle: ['jquery', 'popper.js', 'bootstrap'],

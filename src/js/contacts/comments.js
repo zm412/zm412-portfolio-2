@@ -1,14 +1,14 @@
-
+'use strict'
+const funcFetch = require('../myFetches');
 const News = require('../../components/Contacts');
 
 const React = require('react');
 const ReactDOM = require('react-dom');
-let posts = [{name : 'lkjlj', body: '1111'}];
 
 module.exports = () => {
   let formComment = document.querySelector('#blockComments');
     getFormForComm(formComment);
-    ReactDOM.render(<News data={posts} />, document.getElementById('blockListComments'));
+
 }
 
 
@@ -30,11 +30,14 @@ module.exports = () => {
         </form>
       `);
     startAction();
+    chooseFetch();
   }
 
 
   function startAction(){
     let buttSendComm = document.querySelector('#buttForComment');
+    chooseFetch('/api/contacts/comments');
+
     buttSendComm.addEventListener('click', (e) => {
       let username = document.querySelector('#inpNameForComm');
       let text = document.querySelector('#texarForComm');
@@ -43,24 +46,24 @@ module.exports = () => {
         nameForComment: username.value,
         texarForComment: text.value
       }
-      //console.log(data)
-     fetch('/api/contacts/comments', {
-    method: 'POST',
-    mode: 'same-origin',
-    cache: 'no-cache', 
-    credentials: 'same-origin', 
-    headers: { 'Content-Type': 'application/json' },
-    redirect: 'follow', 
-    referrerPolicy: 'no-referrer', 
-    body: JSON.stringify(data) 
-})
-        .then(response => response.json())
-  .then(result => {
-        posts = result.posts;
-        console.log(posts)
-    ReactDOM.render(<News data={result.posts} />, document.getElementById('blockListComments'));
-  })
-    });
+      
 
-  }
- 
+    chooseFetch(data);
+    funcFetch(url, data)
+        .then(result => {
+          console.log(result.posts)
+    ReactDOM.render(<News data={result.posts} />, document.getElementById('blockListComments'));
+        })
+
+  })
+
+}
+
+
+function chooseFetch(data){
+    funcFetch('/api/contacts/comments', data)
+        .then(result => {
+          console.log(result.posts)
+    ReactDOM.render(<News data={result.posts} />, document.getElementById('blockListComments'));
+        })
+}
