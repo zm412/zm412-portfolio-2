@@ -46,14 +46,10 @@ module.exports = () => {
         nameForComment: username.value,
         texarForComment: text.value
       }
-      
+      username.value = '';
+      text.value = '';
 
     chooseFetch(data);
-    funcFetch(url, data)
-        .then(result => {
-          console.log(result.posts)
-    ReactDOM.render(<News data={result.posts} />, document.getElementById('blockListComments'));
-        })
 
   })
 
