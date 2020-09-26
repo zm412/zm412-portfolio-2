@@ -29,7 +29,6 @@ router.post('/comments', (req, res) => {
   });
 
 router.get('/comments', (req, res) =>{
-  console.log('!!!!!!!!!')
     models.Comm.find({}).lean().then(posts => {
       console.log(posts)
         res.json({posts: posts});

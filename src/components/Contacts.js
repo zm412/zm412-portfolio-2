@@ -19,6 +19,7 @@ class News extends React.Component{
 
     return (
       <ul className="news">
+      <h3> {this.props.message}</h3><hr />
         {newsTemplate}
       </ul>
     );

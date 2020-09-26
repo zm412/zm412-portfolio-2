@@ -13,24 +13,34 @@ module.exports = () => {
   function getAuthForms(elem){
     elem.insertAdjacentHTML('afterbegin', `
       <form action="" method='post' class='login'> <h2>Enter</h2>
+
       <div class='blockAuth'>
+
         <div class="form-group"> <label for="login-login">Login</label>
           <input id="login-login" type="text" class="form-control"  name="login" /> </div>
+      
           <div class="form-group"> <label for="login-password">Password</label>
           <input id="login-password" type="text" class="form-control"  name="password" /> </div>
+
         <div class="buttons"> <button class="switch-button btn btn-primary bg-warning " type="submit">Registration</button>
-          <button class="btn btn-primary btn login-button" type="submit">Sign in</button> </div> </div> </form>
+          <button class="btn btn-primary btn login-button" type="submit">Sign in</button> </div>
+      </div> </form>
 
       <form action="" method='post' class='register'> <h2>Registration</h2>
         <div class='blockAuth'>
+
           <div class="form-group"> <label for="register-login">Login</label>
             <input id="register-login" type="text" class="form-control"  name="login" /> </div>
+
           <div class="form-group"> <label for="register-password">Password</label>
             <input id="register-password" type="text" class="form-control"  name="password" /> </div>
+
           <div class="form-group"> <label for="register-password-confirm">Confirm password</label>
             <input id="register-password-confirm" type="text" class="form-control"  name="passwordConfirm" /> </div>
+
           <div class="buttons"> <button class="btn btn-primary switch-button bg-warning" type="submit">Sing in</button>
-            <button class="btn btn-primary register-button " type="submit">Registration</button> </div> </div> </form>
+            <button class="btn btn-primary register-button " type="submit">Registration</button> </div>
+      </div> </form>
 `); }
 
 function startAction(){

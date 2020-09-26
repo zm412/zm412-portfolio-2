@@ -7,6 +7,7 @@ const contacts = require('@js/contacts/contacts');
 const sendPicture = require('@img/sendPicture');
 const components = require('./Reactives');
 
+
 import '@/main.scss';
 let pagesDep= {
 'home': () => { home(); },
@@ -14,7 +15,8 @@ let pagesDep= {
 'contacts': () => { contacts(); },
 'about': () => { about(); }, 
 'tasks': () => { tasks(); },
-'contentIndex' : () =>{ components(); }
+//'contentIndex' : () =>{ components(); },
+'authTest' : () =>{ components(); }
 
 }
 

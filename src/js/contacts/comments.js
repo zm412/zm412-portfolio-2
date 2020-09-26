@@ -59,7 +59,6 @@ module.exports = () => {
 function chooseFetch(data){
     funcFetch('/api/contacts/comments', data)
         .then(result => {
-          console.log(result.posts)
-    ReactDOM.render(<News data={result.posts} />, document.getElementById('blockListComments'));
+    ReactDOM.render(<News data={result.posts} message={result.isComment} />, document.getElementById('blockListComments'));
         })
 }

@@ -24,7 +24,6 @@ router.post('/register', (req, res) => {
     
     res.json({ ok: false, error: 'Please, use just english letters or numbers', fields: ['login'] });
 
-
   } else if(login.length < 3 || login.length > 16){
     res.json({ ok: false, error: 'Length of field login has to be longer then 3 and shorter then 16 symbols', fields: ['login'] });
 
