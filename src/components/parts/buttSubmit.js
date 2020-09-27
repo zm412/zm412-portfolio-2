@@ -2,18 +2,27 @@
 let React = require('react');
 let {useState} = require('react');
 
-const InpText = ({nameOfEl}) => {
-  const [value, setValue] = useState('');
+class ButtSubmit extends React.Component{
 
+  constructor(){
+    super();
+    this.state = {
+      classNameCollection: "btn btn-primary bg-warning "
+    }
+    
+  }
 
-  return (
-        <div className="form-group">
-          <label htmlFor={nameOfEl}>{nameOfEl}</label>
-          <input id={nameOfEl} type="text" className="form-control" value={value}  onChange={(e) => setValue(e.target.value)} /> 
-    <p>{value}</p>
-        </div>
-  )
-  
+  ifSwitchOn(){
+    this.props.switchOn ? this.state.classNameCollection += this.props.switchOn : this.state.classNameCollection += '';
+    console.log(this.state.classNameCollection)
+    return this.state.classNameCollection;
+  }
+
+  render(){
+    return(
+      <button className={this.ifSwitchOn()} id={this.props.idForButt} onClick={this.props.func.bind(this)} type="submit">{this.props.nameOfButton}</button>
+    )
+  }
 }
 
 
@@ -22,4 +31,8 @@ const InpText = ({nameOfEl}) => {
 
 
 
-module.exports = InpText;
+
+module.exports = ButtSubmit;
+
+
+
