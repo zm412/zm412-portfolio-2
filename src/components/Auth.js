@@ -13,7 +13,7 @@ class Auth extends React.Component{
                       namesOfEl: ['Login', 'Password']
                       },
       blockFormRegister: {idForm: 'register',
-                      namesOfEl: ['Login', 'Password', 'Password-comfirm']},
+                      namesOfEl: ['Login', 'Password', 'Password-confirm']},
     }
   }
 
@@ -36,11 +36,11 @@ class Auth extends React.Component{
 
         if(this.state.regimLogin){
           return(
-          <FormBlock  idForm={login.idForm} listNames={login.namesOfEl} funcLogin={this.sayHi.bind(this)} funcRegister={this.changeRegim.bind(this)} />
+          <FormBlock  idForm={login.idForm} listNames={login.namesOfEl} funcLogin={this.sayHi.bind(this)} funcRegister={this.changeRegim.bind(this)} regimLogin={this.state.regimLogin} />
 )
         }else{
           return(
-          <FormBlock  idForm={register.idForm} listNames={register.namesOfEl} funcLogin={this.changeRegim.bind(this)} funcRegister={this.sayHi.bind(this)} />
+          <FormBlock  idForm={register.idForm} listNames={register.namesOfEl} funcLogin={this.changeRegim.bind(this)} funcRegister={this.sayHi.bind(this)} regimLogin={this.state.regimLogin} />
             )
         }
   }
