@@ -1,4 +1,5 @@
 let React = require('react');
+let axios = require('axios');
 const ReactDOM = require('react-dom');
 let InpText = require('./parts/inpText');
 let ButtSubmit = require('./parts/buttSubmit');
@@ -15,19 +16,14 @@ class Auth extends React.Component{
       collectionOfValues:'' ,
      },
 
-    this.collectValue = this.collectValue.bind(this);
     this.sayHi = this.sayHi.bind(this);
     this.changeRegim = this.changeRegim.bind(this);
+    this.functionForLogin = this.functionForLogin.bind(this);
+    this.functionForRegister = this.functionForRegister.bind(this);
     this.funcForOnChangeLogin = this.funcForOnChangeLogin.bind(this);
     this.funcForOnChangePassword = this.funcForOnChangePassword.bind(this);
     this.funcForOnChangeConfirm = this.funcForOnChangeConfirm.bind(this);
   }
-
-  collectValue(value){
-    this.state.collectionOfValues =  value;
-    console.log(this.state.collectionOfValues)
-    this.setState({collectionOfValues: this.state.collectionOfValues})
-  } 
   
   funcForOnChangeLogin(e){
     e.preventDefault();
@@ -52,11 +48,33 @@ class Auth extends React.Component{
     console.log('sayHi')
   }
 
-  actionForLoginButt(e){
+  functionForLogin(e){
     e.preventDefault();
-    //console.log(document.forms['login'])
+    let loginState = {
+      login: this.state.loginValue,
+      password: this.state.passwValue
+    }
+    console.log(loginState)
+    axios.post('/api/auth/login', loginState)
+      .then(res => {
+        console.log(res);
+      })
   }
  
+  functionForRegister(e){
+    e.preventDefault();
+    let loginState = {
+      login: this.state.loginValue,
+      password: this.state.passwValue,
+      passwordConfirm: this.state.passwConfValue
+    }
+    console.log(loginState)
+    axios.post('/api/auth/register', loginState)
+      .then(res => {
+        console.log(res);
+      })
+  }
+
   changeRegim(e){
     e.preventDefault();
     this.setState({regimLogin: !this.state.regimLogin});
@@ -65,14 +83,16 @@ class Auth extends React.Component{
   render(){
 
         if(this.state.regimLogin){
+
           nameForm = 'Login';
-          funcLoginButt = this.sayHi;
+          funcLoginButt = this.functionForLogin;
           funcRegisterButt = this.changeRegim;
           namesOfEl = [['Login', this.funcForOnChangeLogin, 'loginId', this.state.loginValue], ['Password',this.funcForOnChangePassword, 'passwordId', this.state.passwValue]];
+
         }else{
           nameForm = 'Register';
           funcLoginButt = this.changeRegim;
-          funcRegisterButt = this.sayHi;
+          funcRegisterButt = this.functionForRegister;
           namesOfEl = [['Login', this.funcForOnChangeLogin, 'loginId' , this.state.loginValue], ['Password',this.funcForOnChangePassword, 'passwordId', this.state.passwValue], ['Password-confirm',this.funcForOnChangeConfirm, 'passwordConfirmId', this.state.passwConfValue]];
         }
     
