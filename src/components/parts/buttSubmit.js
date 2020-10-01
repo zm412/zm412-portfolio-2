@@ -1,6 +1,5 @@
 
 let React = require('react');
-let {useState} = require('react');
 
 class ButtSubmit extends React.Component{
 

@@ -2,21 +2,27 @@
 let React = require('react');
 let {useState} = require('react');
 
-const InpText = ({nameOfEl}) => {
+class InpText extends React.Component{
 
-  const [value, setValue] = useState('');
+  constructor(){
+    super();
+      this.state = {
+        value:''
+      }
+    }
+    
 
-  return (
-        <div className="form-group">
-          <label htmlFor={nameOfEl}>{nameOfEl}</label>
-          <input id={nameOfEl} type="text" className="form-control" value={value}  onChange={(e) => setValue(e.target.value)} /> 
-    <p>{value}</p>
-        </div>
-  )
-  
+  render(){
+    return (
+      <div className="form-group">
+        <label htmlFor={this.props.elemId}>{this.props.nameOfEl}</label>
+          <input id={this.props.elemId} type="text" className="form-control" onChange={this.props.func} value={this.props.valueEl} /> 
+            <p>{console.log('something')}</p>
+            <p>{console.log(this.props.nameOfEl)}</p>
+      </div>
+    );
+  }
 }
-
-
 
 
 

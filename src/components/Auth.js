@@ -9,20 +9,52 @@ class Auth extends React.Component{
     super();
     this.state = {
       regimLogin: true,
-      blockFormLogin: {idForm: 'login',
-                      namesOfEl: ['Login', 'Password']
-                      },
-      blockFormRegister: {idForm: 'register',
-                      namesOfEl: ['Login', 'Password', 'Password-confirm']},
-    }
+      loginValue:'',
+      passwValue: '',
+      passwConfValue: '',
+      collectionOfValues:'' ,
+     },
+
+    this.collectValue = this.collectValue.bind(this);
+    this.sayHi = this.sayHi.bind(this);
+    this.changeRegim = this.changeRegim.bind(this);
+    this.funcForOnChangeLogin = this.funcForOnChangeLogin.bind(this);
+    this.funcForOnChangePassword = this.funcForOnChangePassword.bind(this);
+    this.funcForOnChangeConfirm = this.funcForOnChangeConfirm.bind(this);
   }
 
-  generateForm(){
-   
+  collectValue(value){
+    this.state.collectionOfValues =  value;
+    console.log(this.state.collectionOfValues)
+    this.setState({collectionOfValues: this.state.collectionOfValues})
+  } 
+  
+  funcForOnChangeLogin(e){
+    e.preventDefault();
+    this.setState({loginValue: e.target.value});
+    console.log(this.state.loginValue);
   }
 
-  sayHi(){
+  funcForOnChangePassword(e){
+    e.preventDefault();
+    this.setState({passwValue: e.target.value});
+    console.log(this.state.passwValue);
+  }
+
+  funcForOnChangeConfirm(e){
+    e.preventDefault();
+    this.setState({passwConfValue: e.target.value});
+    console.log(this.state.passwConfValue);
+  }
+
+  sayHi(e){
+    e.preventDefault();
     console.log('sayHi')
+  }
+
+  actionForLoginButt(e){
+    e.preventDefault();
+    //console.log(document.forms['login'])
   }
  
   changeRegim(e){
@@ -31,19 +63,30 @@ class Auth extends React.Component{
   }
 
   render(){
-    let login = this.state.blockFormLogin;
-    let register = this.state.blockFormRegister;
 
         if(this.state.regimLogin){
-          return(
-          <FormBlock  idForm={login.idForm} listNames={login.namesOfEl} funcLogin={this.sayHi.bind(this)} funcRegister={this.changeRegim.bind(this)} regimLogin={this.state.regimLogin} />
-)
+          nameForm = 'Login';
+          funcLoginButt = this.sayHi;
+          funcRegisterButt = this.changeRegim;
+          namesOfEl = [['Login', this.funcForOnChangeLogin, 'loginId', this.state.loginValue], ['Password',this.funcForOnChangePassword, 'passwordId', this.state.passwValue]];
         }else{
-          return(
-          <FormBlock  idForm={register.idForm} listNames={register.namesOfEl} funcLogin={this.changeRegim.bind(this)} funcRegister={this.sayHi.bind(this)} regimLogin={this.state.regimLogin} />
-            )
+          nameForm = 'Register';
+          funcLoginButt = this.changeRegim;
+          funcRegisterButt = this.sayHi;
+          namesOfEl = [['Login', this.funcForOnChangeLogin, 'loginId' , this.state.loginValue], ['Password',this.funcForOnChangePassword, 'passwordId', this.state.passwValue], ['Password-confirm',this.funcForOnChangeConfirm, 'passwordConfirmId', this.state.passwConfValue]];
         }
-  }
+    
+    let arrayOfArgs = [nameForm, funcLoginButt, funcRegisterButt,this.state.regimLogin, namesOfEl];
+
+     
+          return(
+            <div>
+          <FormBlock  formInformation={arrayOfArgs} />
+          <p>{arrayOfArgs[0]}</p>
+            </div>
+)
+          
+        }
 }
 
 

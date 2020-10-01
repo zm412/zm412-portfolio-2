@@ -30,7 +30,7 @@ const ImpText = (nameOfEl) => {
 }
 
 
-console.log(InpText)
+//console.log(InpText)
 
 
 
