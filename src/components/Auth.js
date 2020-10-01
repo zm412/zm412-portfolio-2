@@ -82,7 +82,6 @@ class Auth extends React.Component{
           return(
             <div>
           <FormBlock  formInformation={arrayOfArgs} />
-          <p>{arrayOfArgs[0]}</p>
             </div>
 )
           

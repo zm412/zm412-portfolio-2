@@ -7,15 +7,8 @@ class FormBlock extends React.Component{
 
   constructor(props){
     super(props);
-    this.funcForOnSubmit = this.funcForOnSubmit.bind(this);
   }
   
-
-  funcForOnSubmit(){
-    this.setState({isSubmit:true});
-    console.log(this.state.isSubmit)
-  }
-
   render(){
     let outInfo = this.props.formInformation;
     
@@ -27,14 +20,9 @@ class FormBlock extends React.Component{
                     </div>
     
     return(
-      <form name={outInfo[0]} action="" onSubmit={(e) => {
-          e.preventDefault();
-          funcForOnSumbit();
-      } } method="post"> <h4>{outInfo[0].toUpperCase()}</h4>
+      <form name={outInfo[0]} action="" method="post"> <h4>{outInfo[0].toUpperCase()}</h4>
         {listInps}
         {listButts}
-      <p>{console.log(outInfo[4])}</p>
-      <p>{outInfo[0]}</p>
       </form>
     )
   }

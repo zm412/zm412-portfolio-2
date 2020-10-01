@@ -6,9 +6,6 @@ class InpText extends React.Component{
 
   constructor(){
     super();
-      this.state = {
-        value:''
-      }
     }
     
 
@@ -17,8 +14,7 @@ class InpText extends React.Component{
       <div className="form-group">
         <label htmlFor={this.props.elemId}>{this.props.nameOfEl}</label>
           <input id={this.props.elemId} type="text" className="form-control" onChange={this.props.func} value={this.props.valueEl} /> 
-            <p>{console.log('something')}</p>
-            <p>{console.log(this.props.nameOfEl)}</p>
+            <p>{this.props.valueEl}</p>
       </div>
     );
   }
