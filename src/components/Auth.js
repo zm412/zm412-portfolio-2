@@ -13,10 +13,9 @@ class Auth extends React.Component{
       loginValue:'',
       passwValue: '',
       passwConfValue: '',
-      collectionOfValues:'' ,
+      cleanFields: false
      },
 
-    this.sayHi = this.sayHi.bind(this);
     this.changeRegim = this.changeRegim.bind(this);
     this.functionForLogin = this.functionForLogin.bind(this);
     this.functionForRegister = this.functionForRegister.bind(this);
@@ -43,9 +42,11 @@ class Auth extends React.Component{
     console.log(this.state.passwConfValue);
   }
 
-  sayHi(e){
-    e.preventDefault();
-    console.log('sayHi')
+  cleanFields(){
+    this.setState({
+      loginValue: '',
+      passwValue: '',
+      passwConfValue: ''})
   }
 
   functionForLogin(e){
@@ -59,6 +60,7 @@ class Auth extends React.Component{
       .then(res => {
         console.log(res);
       })
+    this.cleanFields();
   }
  
   functionForRegister(e){
@@ -73,14 +75,19 @@ class Auth extends React.Component{
       .then(res => {
         console.log(res);
       })
+
+    this.cleanFields();
   }
 
   changeRegim(e){
     e.preventDefault();
     this.setState({regimLogin: !this.state.regimLogin});
+    this.cleanFields();
   }
 
   render(){
+
+    let nameForm, funcLoginButt, funcRegisterButt, namesOfEl;
 
         if(this.state.regimLogin){
 
