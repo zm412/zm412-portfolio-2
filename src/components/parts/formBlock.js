@@ -12,7 +12,7 @@ class FormBlock extends React.Component{
   render(){
     let outInfo = this.props.formInformation;
     
-    let listInps = outInfo[4].map((item, index) =>  <InpText key={index} nameOfEl={item[0]} func={item[1]} elemId={item[2]} valueEl={item[3]}   /> );
+    let listInps = outInfo[4].map((item, index) =>  <InpText key={index} nameOfEl={item} func={outInfo[5]}  /> );
     
     let listButts = <div>
             <ButtSubmit nameOfButton={'login'}  func={outInfo[1]} inviting={outInfo[3] ? false : true} />

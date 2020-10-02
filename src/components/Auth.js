@@ -10,50 +10,39 @@ class Auth extends React.Component{
     super();
     this.state = {
       regimLogin: true,
-      loginValue:'',
-      passwValue: '',
-      passwConfValue: '',
+      login:'',
+      passw: '',
+      passwConf: '',
       cleanFields: false
      },
 
     this.changeRegim = this.changeRegim.bind(this);
+    this.funcOnChange = this.funcOnChange.bind(this);
     this.functionForLogin = this.functionForLogin.bind(this);
     this.functionForRegister = this.functionForRegister.bind(this);
-    this.funcForOnChangeLogin = this.funcForOnChangeLogin.bind(this);
-    this.funcForOnChangePassword = this.funcForOnChangePassword.bind(this);
-    this.funcForOnChangeConfirm = this.funcForOnChangeConfirm.bind(this);
-  }
-  
-  funcForOnChangeLogin(e){
-    e.preventDefault();
-    this.setState({loginValue: e.target.value});
-    console.log(this.state.loginValue);
   }
 
-  funcForOnChangePassword(e){
+  funcOnChange(e){
     e.preventDefault();
-    this.setState({passwValue: e.target.value});
-    console.log(this.state.passwValue);
+    let key = e.target.id; 
+    let value = e.target.value;
+    this.setState((state) => {
+      return {[key] : value}
+    })
+    console.log(this.state[key]);
   }
 
-  funcForOnChangeConfirm(e){
-    e.preventDefault();
-    this.setState({passwConfValue: e.target.value});
-    console.log(this.state.passwConfValue);
-  }
+
 
   cleanFields(){
-    this.setState({
-      loginValue: '',
-      passwValue: '',
-      passwConfValue: ''})
+    this.setState({ login: '', passw: '', passwConf: ''})
   }
 
   functionForLogin(e){
     e.preventDefault();
     let loginState = {
-      login: this.state.loginValue,
-      password: this.state.passwValue
+      login: this.state.login,
+      password: this.state.passw
     }
     console.log(loginState)
     axios.post('/api/auth/login', loginState)
@@ -66,9 +55,9 @@ class Auth extends React.Component{
   functionForRegister(e){
     e.preventDefault();
     let loginState = {
-      login: this.state.loginValue,
-      password: this.state.passwValue,
-      passwordConfirm: this.state.passwConfValue
+      login: this.state.login,
+      password: this.state.passw,
+      passwordConfirm: this.state.passwConf
     }
     console.log(loginState)
     axios.post('/api/auth/register', loginState)
@@ -94,16 +83,23 @@ class Auth extends React.Component{
           nameForm = 'Login';
           funcLoginButt = this.functionForLogin;
           funcRegisterButt = this.changeRegim;
-          namesOfEl = [['Login', this.funcForOnChangeLogin, 'loginId', this.state.loginValue], ['Password',this.funcForOnChangePassword, 'passwordId', this.state.passwValue]];
+          namesOfEl = [
+            ['Login', 'login', this.state.login, 'text'], 
+            ['Password', 'passw', this.state.passw, 'password']
+          ];
 
         }else{
           nameForm = 'Register';
           funcLoginButt = this.changeRegim;
           funcRegisterButt = this.functionForRegister;
-          namesOfEl = [['Login', this.funcForOnChangeLogin, 'loginId' , this.state.loginValue], ['Password',this.funcForOnChangePassword, 'passwordId', this.state.passwValue], ['Password-confirm',this.funcForOnChangeConfirm, 'passwordConfirmId', this.state.passwConfValue]];
+          namesOfEl = [
+            ['Login', 'login' , this.state.login, 'text'], 
+            ['Password', 'passw', this.state.passw, 'password'],
+            ['Password-confirm', 'passwConf', this.state.passwConf, 'password']
+          ];
         }
     
-    let arrayOfArgs = [nameForm, funcLoginButt, funcRegisterButt,this.state.regimLogin, namesOfEl];
+    let arrayOfArgs = [nameForm, funcLoginButt, funcRegisterButt,this.state.regimLogin, namesOfEl, this.funcOnChange];
 
      
           return(

@@ -10,11 +10,14 @@ class InpText extends React.Component{
     
 
   render(){
+    const [nameEl, idEl, valueEl, typeEl] = this.props.nameOfEl;
+    
+     
     return (
       <div className="form-group">
-        <label htmlFor={this.props.elemId}>{this.props.nameOfEl}</label>
-          <input id={this.props.elemId} type="text" className="form-control" onChange={this.props.func} value={this.props.valueEl} /> 
-            <p>{this.props.valueEl}</p>
+        <label htmlFor={idEl}>{nameEl}</label>
+          <input id={idEl} type={typeEl} className="form-control" onChange={this.props.func} value={valueEl} /> 
+            <p>{valueEl}</p>
       </div>
     );
   }
