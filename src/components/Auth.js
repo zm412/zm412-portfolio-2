@@ -11,9 +11,15 @@ class Auth extends React.Component{
     this.state = {
       regimLogin: true,
       login:'',
-      passw: '',
-      passwConf: '',
-      cleanFields: false
+      password: '',
+      passwordConfirm: '',
+      cleanFields: false,
+      dataForStylesInp:'',
+      dataFromRes:'',
+      stylesForInp: 'form-control',
+      loginStyle: 'form-control',
+      passwordStyle: 'form-control',
+      passwordConfirmStyle: 'form-control'
      },
 
     this.changeRegim = this.changeRegim.bind(this);
@@ -22,32 +28,49 @@ class Auth extends React.Component{
     this.functionForRegister = this.functionForRegister.bind(this);
   }
 
+  chooseStyle(obj){
+    let target = obj.data;
+    let keysOfStates = ['login', 'password', 'passwordConfirm'];
+    if(target === '') return;
+      if(target.ok === true){
+        keysOfStates.map(item => this.setState({[item+'Style']:'form-control border-success' }));
+      }else if(target.ok === false){
+        keysOfStates.map(item => target.fields.includes(item) ? this.setState({[item+'Style']:'form-control border-danger' }) : this.state[item + 'Style']);
+      }
+    console.log(this.state.loginStyle);
+    console.log(this.state.passwordStyle);
+    console.log(this.state.passwordConfirmStyle);
+  }
+
+
   funcOnChange(e){
     e.preventDefault();
-    let key = e.target.id; 
+    let key = e.target.id;
     let value = e.target.value;
     this.setState((state) => {
       return {[key] : value}
     })
     console.log(this.state[key]);
   }
-
+  
+  
 
 
   cleanFields(){
-    this.setState({ login: '', passw: '', passwConf: ''})
+    this.setState({ login: '', password: '', passwordConfirm: ''})
   }
 
   functionForLogin(e){
     e.preventDefault();
     let loginState = {
       login: this.state.login,
-      password: this.state.passw
+      password: this.state.password
     }
     console.log(loginState)
     axios.post('/api/auth/login', loginState)
       .then(res => {
-        console.log(res);
+        this.setState({dataForStylesInp: res.data});
+        this.chooseStyle(res);
       })
     this.cleanFields();
   }
@@ -56,13 +79,14 @@ class Auth extends React.Component{
     e.preventDefault();
     let loginState = {
       login: this.state.login,
-      password: this.state.passw,
-      passwordConfirm: this.state.passwConf
+      password: this.state.password,
+      passwordConfirm: this.state.passwordConfirm
     }
     console.log(loginState)
     axios.post('/api/auth/register', loginState)
       .then(res => {
-        console.log(res);
+        this.setState({dataForStylesInp: res.data});
+        this.chooseStyle(res);
       })
 
     this.cleanFields();
@@ -74,9 +98,12 @@ class Auth extends React.Component{
     this.cleanFields();
   }
 
+
+
   render(){
 
     let nameForm, funcLoginButt, funcRegisterButt, namesOfEl;
+    
 
         if(this.state.regimLogin){
 
@@ -84,8 +111,8 @@ class Auth extends React.Component{
           funcLoginButt = this.functionForLogin;
           funcRegisterButt = this.changeRegim;
           namesOfEl = [
-            ['Login', 'login', this.state.login, 'text'], 
-            ['Password', 'passw', this.state.passw, 'password']
+            ['Login', 'login', this.state.login, 'text', this.state.dataForStylesInp, this.state.loginStyle], 
+            ['Password', 'password', this.state.password, 'password', this.state.dataForStylesInp, this.state.passwordStyle]
           ];
 
         }else{
@@ -93,9 +120,9 @@ class Auth extends React.Component{
           funcLoginButt = this.changeRegim;
           funcRegisterButt = this.functionForRegister;
           namesOfEl = [
-            ['Login', 'login' , this.state.login, 'text'], 
-            ['Password', 'passw', this.state.passw, 'password'],
-            ['Password-confirm', 'passwConf', this.state.passwConf, 'password']
+            ['Login', 'login' , this.state.login, 'text', this.state.dataForStylesInp, this.state.loginStyle ], 
+            ['Password', 'password', this.state.password, 'password', this.state.dataForStylesInp, this.state.passwordStyle],
+            ['Password-confirm', 'passwordConfirm', this.state.passwordConfirm, 'password', this.state.dataForStylesInp, this.state.passwordConfirmStyle]
           ];
         }
     
@@ -105,6 +132,8 @@ class Auth extends React.Component{
           return(
             <div>
           <FormBlock  formInformation={arrayOfArgs} />
+            <p>{console.log(this.state.dataForStylesInp)}</p>
+            <p>{console.log(this.state.loginStyle)}</p>
             </div>
 )
           
