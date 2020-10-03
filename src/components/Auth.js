@@ -13,10 +13,11 @@ class Auth extends React.Component{
       login:'',
       password: '',
       passwordConfirm: '',
-      cleanFields: false,
       loginStyle: 'form-control',
       passwordStyle: 'form-control',
-      passwordConfirmStyle: 'form-control'
+      passwordConfirmStyle: 'form-control',
+      messageOnTheWall:'',
+      styleForMessageOnTheWall:''
      },
 
     this.changeRegim = this.changeRegim.bind(this);
@@ -32,10 +33,18 @@ class Auth extends React.Component{
     if(target === '') return;
       if(target.ok === true){
         keysOfStates.map(item => this.setState({[item+'Style']:'form-control border-success' }));
+        this.setState({messageOnTheWall: 'You are in!!!'})
+        this.setState({styleForMessageOnTheWall: 'border-success bg-success'})
         this.cleanFields();
       }else if(target.ok === false){
         keysOfStates.map(item => target.fields.includes(item) ? this.setState({[item+'Style']:'form-control border-danger' }) : this.setState({[item + 'Style']: 'form-control'}));
+        this.setState({messageOnTheWall: target.error})
+        this.setState({styleForMessageOnTheWall: 'border-danger bg-warning'})
       }
+  }
+
+  addingErrorP(obj){
+    
   }
 
 
@@ -53,7 +62,7 @@ class Auth extends React.Component{
 
 
   cleanFields(){
-    this.setState({ login: '', password: '', passwordConfirm: ''})
+    this.setState({ login: '', password: '', passwordConfirm: '', messageOnTheWall:''})
   }
 
   clearFocus(){
@@ -132,7 +141,9 @@ class Auth extends React.Component{
      
           return(
             <div>
-          <FormBlock  formInformation={arrayOfArgs} />
+              <p className={this.state.styleForMessageOnTheWall}>{this.state.messageOnTheWall}</p>
+                <FormBlock  formInformation={arrayOfArgs} />
+            <p>{console.log(this.state.messageOnTheWall)}</p>
             </div>
 )
           
