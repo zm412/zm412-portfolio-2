@@ -21,13 +21,13 @@ class InpText extends React.Component{
 //
 
   render(){
-    const [nameEl, idEl, valueEl, typeEl, classInp] = this.props.nameOfEl;
+    const [nameEl, idEl, valueEl, typeEl, classInp, cleanFocus, onFocusfunc] = this.props.nameOfEl;
     
      
     return (
       <div className="form-group">
         <label htmlFor={idEl}>{nameEl}</label>
-          <input id={idEl} type={typeEl} className={classInp} onChange={this.props.func} value={valueEl} /> 
+          <input id={idEl} type={typeEl} className={classInp} onChange={this.props.func} value={valueEl}  onFocus={this.props.cleanFocus ? this.props.funcFocus: ()=>{}  }/> 
             <p>{valueEl}</p>
       </div>
     );

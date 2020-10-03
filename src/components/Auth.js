@@ -17,7 +17,8 @@ class Auth extends React.Component{
       passwordStyle: 'form-control',
       passwordConfirmStyle: 'form-control',
       messageOnTheWall:'',
-      styleForMessageOnTheWall:''
+      styleForMessageOnTheWall:'',
+      cleanFocus: false
      },
 
     this.changeRegim = this.changeRegim.bind(this);
@@ -33,13 +34,17 @@ class Auth extends React.Component{
     if(target === '') return;
       if(target.ok === true){
         keysOfStates.map(item => this.setState({[item+'Style']:'form-control border-success' }));
-        this.setState({messageOnTheWall: 'You are in!!!'})
-        this.setState({styleForMessageOnTheWall: 'border-success bg-success'})
-        this.cleanFields();
+        this.setState({
+          messageOnTheWall: 'You are in!!!', 
+          styleForMessageOnTheWall: 'border-success bg-success'
+        });
+        this.clearFocus();
       }else if(target.ok === false){
         keysOfStates.map(item => target.fields.includes(item) ? this.setState({[item+'Style']:'form-control border-danger' }) : this.setState({[item + 'Style']: 'form-control'}));
-        this.setState({messageOnTheWall: target.error})
-        this.setState({styleForMessageOnTheWall: 'border-danger bg-warning'})
+        this.setState({
+          messageOnTheWall: target.error, 
+          styleForMessageOnTheWall: 'border-danger bg-warning'
+        });
       }
   }
 
@@ -61,13 +66,11 @@ class Auth extends React.Component{
   
 
 
-  cleanFields(){
-    this.setState({ login: '', password: '', passwordConfirm: '', messageOnTheWall:''})
-  }
 
   clearFocus(){
     let baseStyle = 'form-control';
-    this.setState({ loginStyle: baseStyle, passwordStyle: baseStyle, passwordConfirmStyle: baseStyle});
+    this.setState({ loginStyle: baseStyle, passwordStyle: baseStyle, passwordConfirmStyle: baseStyle, login: '', password: '', passwordConfirm: '', messageOnTheWall:''});
+    this.setState({cleanFocus: false})
   }
 
   functionForLogin(e){
@@ -80,6 +83,9 @@ class Auth extends React.Component{
     axios.post('/api/auth/login', loginState)
       .then(res => {
         this.chooseStyle(res);
+        if(res.data.ok === false){
+          this.setState({cleanFocus: true});
+        }
       })
   }
  
@@ -94,15 +100,17 @@ class Auth extends React.Component{
     axios.post('/api/auth/register', loginState)
       .then(res => {
         this.chooseStyle(res);
+        if(res.data.ok === false){
+          this.setState({cleanFocus: true});
+        }
       })
 
   }
 
   changeRegim(e){
     e.preventDefault();
-    this.clearFocus();
     this.setState({regimLogin: !this.state.regimLogin});
-    this.cleanFields();
+    this.clearFocus();
     console.log(this.state.loginStyle)
     console.log(this.state.passwordStyle)
     console.log(this.state.passwordConfirmStyle)
@@ -136,7 +144,7 @@ class Auth extends React.Component{
           ];
         }
     
-    let arrayOfArgs = [nameForm, funcLoginButt, funcRegisterButt,this.state.regimLogin, namesOfEl, this.funcOnChange];
+    let arrayOfArgs = [nameForm, funcLoginButt, funcRegisterButt,this.state.regimLogin, namesOfEl, this.funcOnChange, this.state.cleanFocus, this.clearFocus];
 
      
           return(
@@ -144,6 +152,7 @@ class Auth extends React.Component{
               <p className={this.state.styleForMessageOnTheWall}>{this.state.messageOnTheWall}</p>
                 <FormBlock  formInformation={arrayOfArgs} />
             <p>{console.log(this.state.messageOnTheWall)}</p>
+            <p>{console.log(this.state.cleanFocus)}</p>
             </div>
 )
           
