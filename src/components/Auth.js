@@ -14,8 +14,6 @@ class Auth extends React.Component{
       password: '',
       passwordConfirm: '',
       cleanFields: false,
-      dataFromRes:'',
-      stylesForInp: 'form-control',
       loginStyle: 'form-control',
       passwordStyle: 'form-control',
       passwordConfirmStyle: 'form-control'
@@ -25,6 +23,7 @@ class Auth extends React.Component{
     this.funcOnChange = this.funcOnChange.bind(this);
     this.functionForLogin = this.functionForLogin.bind(this);
     this.functionForRegister = this.functionForRegister.bind(this);
+    this.clearFocus = this.clearFocus.bind(this);
   }
 
   chooseStyle(obj){
@@ -33,12 +32,10 @@ class Auth extends React.Component{
     if(target === '') return;
       if(target.ok === true){
         keysOfStates.map(item => this.setState({[item+'Style']:'form-control border-success' }));
+        this.cleanFields();
       }else if(target.ok === false){
-        keysOfStates.map(item => target.fields.includes(item) ? this.setState({[item+'Style']:'form-control border-danger' }) : this.state[item + 'Style']);
+        keysOfStates.map(item => target.fields.includes(item) ? this.setState({[item+'Style']:'form-control border-danger' }) : this.setState({[item + 'Style']: 'form-control'}));
       }
-    console.log(this.state.loginStyle);
-    console.log(this.state.passwordStyle);
-    console.log(this.state.passwordConfirmStyle);
   }
 
 
@@ -59,6 +56,11 @@ class Auth extends React.Component{
     this.setState({ login: '', password: '', passwordConfirm: ''})
   }
 
+  clearFocus(){
+    let baseStyle = 'form-control';
+    this.setState({ loginStyle: baseStyle, passwordStyle: baseStyle, passwordConfirmStyle: baseStyle});
+  }
+
   functionForLogin(e){
     e.preventDefault();
     let loginState = {
@@ -70,7 +72,6 @@ class Auth extends React.Component{
       .then(res => {
         this.chooseStyle(res);
       })
-    this.cleanFields();
   }
  
   functionForRegister(e){
@@ -86,13 +87,16 @@ class Auth extends React.Component{
         this.chooseStyle(res);
       })
 
-    this.cleanFields();
   }
 
   changeRegim(e){
     e.preventDefault();
+    this.clearFocus();
     this.setState({regimLogin: !this.state.regimLogin});
     this.cleanFields();
+    console.log(this.state.loginStyle)
+    console.log(this.state.passwordStyle)
+    console.log(this.state.passwordConfirmStyle)
   }
 
 
@@ -117,7 +121,7 @@ class Auth extends React.Component{
           funcLoginButt = this.changeRegim;
           funcRegisterButt = this.functionForRegister;
           namesOfEl = [
-            ['Login', 'login' , this.state.login, 'text', , this.state.loginStyle ], 
+            ['Login', 'login' , this.state.login, 'text',  this.state.loginStyle ], 
             ['Password', 'password', this.state.password, 'password', this.state.passwordStyle],
             ['Password-confirm', 'passwordConfirm', this.state.passwordConfirm, 'password', this.state.passwordConfirmStyle]
           ];
