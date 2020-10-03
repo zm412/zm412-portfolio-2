@@ -6,9 +6,6 @@ class InpText extends React.Component{
 
   constructor(props){
     super(props);
-    this.state = { 
-      styles:  'form-control' }
-
     }
 //    
 //  bordersColor(e){
@@ -24,13 +21,13 @@ class InpText extends React.Component{
 //
 
   render(){
-    const [nameEl, idEl, valueEl, typeEl, dataStyle, classInp] = this.props.nameOfEl;
+    const [nameEl, idEl, valueEl, typeEl, classInp] = this.props.nameOfEl;
     
      
     return (
       <div className="form-group">
         <label htmlFor={idEl}>{nameEl}</label>
-          <input id={idEl} type={typeEl} className={classInp} data-style={dataStyle} onChange={this.props.func} value={valueEl} /> 
+          <input id={idEl} type={typeEl} className={classInp} onChange={this.props.func} value={valueEl} /> 
             <p>{valueEl}</p>
       </div>
     );
